@@ -26,7 +26,7 @@ node {
 
 task buildProd(type: NpmTask, dependsOn: 'npmInstall'){
     group = 'build'
-    description = 'Build frontend side applicaton and in backend static resources folder.'
+    description = 'Build frontend side application and in backend static resources folder.'
     args = ['run', 'buildProd']
 }
 
