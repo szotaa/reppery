@@ -1,0 +1,29 @@
+language: java
+jdk: oraclejdk8
+
+branches:
+  only:
+  - master
+
+env:
+  global:
+    - secure: "CoRgX8rEeoO1mvkfzAiuu/otz/jtplY7zUeIfwUfUkSeU+Pr4v0Dv47vNSZzj/8Y7wqLNaITvHvmSl2KakFiGmU1IEv6YihTzX5/6lJKbsocOrqIrQLgc4YM16/04tT2zIWeF4UtTia4+9bT7D6ti+FlBUAztIUyoA234K3hiCgdiws62kxalcvVN+X2XpmcA3B5pF7Xxm+ndF0azGmPsottQth0ZkG74Wj2/RE33sTCFth8T2ibWuGTI77ZApnxErRpGVWV9C2QoLNE6ROd0NdtUBbu+1F5/9J3dmMdkaEVWqnRR7TMFOLp3agsq/nzQOSMAyYvSqsYDFafJBQFSn6MZA3p1/mOSV5kHYj4x50OxBeLps+7ym8liaQnmG2Z5/qOV2sG06EmLuKOwoehtw73fLj0y50dfRncx0RpAWssYGQIiZEeSKav0YTNRqSfjk3kP72xqU6nObimHvWJiuA9zjZimlzvt6dk3HJXvNXqCtSwEO1bIA4Aokj3beYRO3OsHYTk88ILEvQEER7rQnyYt288ZUYT6K2QiVUjohe4W5E0c/NSBZCgXuNwwoS6MBXj9JoUYpRlESOh1hVsYRsrloRnXQL2v5mnc04qjREkJ5OdEZjOxaR08bk3aGJaqg01ThTEMRR0+KhLV9l7USCKSZrh1qfXx87bi716U60="
+    - secure: "XXwEe/Qp9A/EimWX+9BTo7kY5z5o/Qm5SyJxmpoUpxmpJObYzA8twTHaAeIBOCXVJEgKKGYzb/7HMiSbnIDrm5sdML89JCZJASPOJ+CDlFMfBzCTHNpHRmHwwFG9K/fEu06Xq1pOIrLHlsfU9EhrXVQdMnUijGlnoDh1OHaa/BJK7FD81riR/9b7j7AeXc5Lw0VndpS16zNl/VjgAJlPjewYJ9WfEfwTxc4jh1ipCLvYU5Vig0u9D3ZwF/tF9t1aG9e46yfFLn2q8liDLzotQr1OxX/nSqx6MMRdUiSoNPUm+cgM4a/FXwvpXpAF+u9P4MJadhpxDbcKra8k8D6rt2/JAjNYP8yuAnNz4uRbxeQmirywd5AdLyy12fHgEQeBpnaHQvQpSmKVQNCM2lyC6Dyt6/X3CtZDyWvmbfF2O4GjnYuQ+nGdBY5HZQYjnrXDKyahxslg6xPdYbz6H5vvT6XtIm01PlMGvWpV4HVLbqDWhV9zgAuVKpkmLziEtX2mGbYLfjCRpSSy9v586MEcq4Mps9NDSyNSpCY7fzIrMSbI3NsyDeZMjGfVwv7Unu3UnsqgowZKpcYCPsupCrn2QRTTyiD6l+hHV09cRiUC+VIqS5G3z7rKriu3iAApNyE/1Xc2nu1P57hL+WMu7kn0IGw9y+NvkTwCHOljC8lWW0s="
+    - COMMIT = ${TRAVIS_COMMIT::7}
+
+addons:
+  sonarcloud:
+    organization: "szotaa-github"
+    token:
+      secure: $SONAR_TOKEN
+
+sudo: required
+
+script:
+  - ./gradlew test :reppery-backend:jacocoTestCoverageVerification
+  - ./gradlew :reppery-backend:sonarqube
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: reppery

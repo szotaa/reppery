@@ -10,5 +10,5 @@ allprojects {
 
 task bootFull(type: GradleBuild){
 	group 'application'
-	setTasks([':reppery-frontend:npmInstall',':reppery-backend:clean' , ':reppery-frontend:buildProd', ':reppery-backend:bootRun'])
+	setTasks([':reppery-frontend:npmInstall',':reppery-backend:cleanFrontend' , ':reppery-frontend:buildProd', ':reppery-backend:bootRun'])
 }
