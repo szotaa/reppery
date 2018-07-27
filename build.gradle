@@ -1,0 +1,16 @@
+group = 'pl.szotaa'
+version = '0.0.1-SNAPSHOT'
+
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+task bootFull(type: GradleBuild){
+	group 'application'
+	setTasks([':reppery-frontend:npmInstall', ':reppery-frontend:buildProd', ':reppery-backend:bootRun'])
+
+}

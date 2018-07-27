@@ -50,3 +50,4 @@ nbdist/
 **/out-tsc
 **/e2e/*.js
 **/e2e/*.map
+**/static
