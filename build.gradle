@@ -37,9 +37,10 @@ task stage(type: GradleBuild) {
     finalizedBy 'reppery-frontend:cleanAngularProd'
 }
 
+//Should be executed only with --parallel flag!!!
 task serve(type: Exec){
     group 'dev'
-    description 'Runs both backend and frontend apps in development mode.'
+    description 'Runs both backend and frontend apps in development mode. Don\'t execute without --parallel flag'
     dependsOn 'reppery-frontend:serve'
     dependsOn 'reppery-backend:serve'
 }
