@@ -13,8 +13,12 @@ task bootFull(type: GradleBuild){
 	setTasks([':reppery-frontend:npmInstall',':reppery-backend:cleanFrontend' , ':reppery-frontend:buildProd'])
 }
 
-task build {
-    println('build')
+task stage(type: GradleBuild) {
+    println('stage')
+    group 'application'
+    setTasks(['build'])
 }
 
-build.dependsOn bootFull
+task build {println 'build'}
+
+stage.dependsOn bootFull
