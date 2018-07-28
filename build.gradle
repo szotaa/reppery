@@ -36,3 +36,10 @@ task stage(type: GradleBuild) {
     finalizedBy 'reppery-backend:cleanStaticResources'
     finalizedBy 'reppery-frontend:cleanAngularProd'
 }
+
+task serve(type: Exec){
+    group 'dev'
+    description 'Runs both backend and frontend apps in development mode.'
+    dependsOn 'reppery-frontend:serve'
+    dependsOn 'reppery-backend:serve'
+}

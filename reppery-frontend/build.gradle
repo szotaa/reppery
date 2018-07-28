@@ -22,7 +22,6 @@ node {
 
 task buildAngularProd(type: NpmTask, dependsOn: 'npmInstall'){
     group 'build'
-    dependsOn 'npmInstall'
     description 'Build frontend Angular application in production mode.'
     args = ['run', 'buildProd']
 }
@@ -31,4 +30,10 @@ task cleanAngularProd(type: Delete){
   group 'cleanup'
   description 'Deletes build frontend Angular application in production mode.'
   delete angularProdBuildPath
+}
+
+task serve(type: NpmTask){
+  group 'dev'
+  description 'Equivalent of running ng serve command.'
+  args = ['run', 'ng' ,'serve']
 }

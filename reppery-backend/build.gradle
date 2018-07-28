@@ -66,3 +66,9 @@ task updateEmbeddedAngularClient(type: Copy){
 	from file(angularProdBuildPath)
 	into file(staticResourcesPath)
 }
+
+task serve(type: Exec){
+	group 'dev'
+	description 'Runs Spring Boot with dev profile enabled.'
+	dependsOn bootRun
+}
