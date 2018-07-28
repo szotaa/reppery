@@ -1,24 +1,20 @@
 group = 'pl.szotaa'
 version = '0.0.1-SNAPSHOT'
 
-
 allprojects {
     repositories {
         mavenCentral()
     }
 }
 
-task bootFull(type: GradleBuild){
-	group 'application'
-	setTasks([':reppery-frontend:npmInstall',':reppery-backend:cleanFrontend' , ':reppery-frontend:buildProd'])
-}
-
 task stage(type: GradleBuild) {
-    println('stage')
-    group 'application'
-    setTasks(['build'])
+    group 'build'
+    description 'Method used by Heroku on deployment. Builds and integrates whole application.'
+
+    setTasks(['reppery-frontend:buildAngularProd',
+              'reppery-backend:updateEmbeddedAngularClient',
+              'reppery-backend:build'])
+
+    finalizedBy 'reppery-backend:cleanStaticResources'
+    finalizedBy 'reppery-frontend:cleanAngularProd'
 }
-
-task build {println 'build'}
-
-stage.dependsOn bootFull

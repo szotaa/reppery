@@ -29,15 +29,9 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-task cleanFrontend(type: Delete){
-	group 'build'
-	delete "${rootDir}/reppery-backend/src/main/resources/static"
 }
 
 jacocoTestReport {
@@ -56,4 +50,17 @@ jacocoTestCoverageVerification {
 			}
 		}
 	}
+}
+
+task cleanStaticResources(type: Delete){
+	group 'cleanup'
+	description 'Removes everything in reppery-backend/src/main/resources/static folder.'
+	delete "${rootDir}/reppery-backend/src/main/resources/static"
+}
+
+task updateEmbeddedAngularClient(type: Copy){
+	group 'other'
+	description 'Copies prebuilt Angular client to reppery-backend/src/main/resources/static folder.'
+	from file("${rootDir}/reppery-frontend/build")
+	into file("${rootDir}/reppery-backend/src/main/resources/static")
 }

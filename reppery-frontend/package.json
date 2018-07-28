@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buildProd": "ng build --output-path ../reppery-backend/src/main/resources/static --prod"
+    "buildProd": "ng build --output-path build --prod"
   },
   "private": true,
   "dependencies": {

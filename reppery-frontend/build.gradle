@@ -24,10 +24,15 @@ node {
     nodeModulesDir = file("${rootDir}/reppery-frontend")
 }
 
-task buildProd(type: NpmTask, dependsOn: 'npmInstall'){
-    group = 'build'
-    description = 'Build frontend side application and in backend static resources folder.'
+task buildAngularProd(type: NpmTask, dependsOn: 'npmInstall'){
+    group 'build'
+    dependsOn 'npmInstall'
+    description 'Build frontend Angular application in production mode.'
     args = ['run', 'buildProd']
 }
 
-
+task cleanAngularProd(type: Delete){
+  group 'cleanup'
+  description 'Deletes build frontend Angular application in production mode.'
+  delete "${rootDir}/reppery-frontend/build"
+}
