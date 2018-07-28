@@ -14,6 +14,10 @@ allprojects {
         sonarcubeGradlePluginVersion = '2.6.2'
         nodeVersion = '10.4.1'
         npmVersion = '6.1.0'
+        lombokVersion = '1.18.2'
+        groovyVersion = '2.4.15'
+        spockCoreVersion = '1.1-groovy-2.4'
+        spockSpringVersion = '1.1-groovy-2.4'
     }
 
     repositories {

@@ -12,7 +12,8 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'groovy'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
@@ -28,7 +29,11 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.projectlombok:lombok:${lombokVersion}")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
+	testCompile("org.spockframework:spock-core:${spockCoreVersion}")
+	testCompile("org.spockframework:spock-spring:1.1-groovy-2.4")
 }
 
 jacocoTestReport {
