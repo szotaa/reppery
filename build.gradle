@@ -1,7 +1,21 @@
-group = 'pl.szotaa'
-version = '0.0.1-SNAPSHOT'
+group 'pl.szotaa'
+version '0.0.1-SNAPSHOT'
 
 allprojects {
+    ext {
+        //paths
+        staticResourcesPath = "${rootDir}/reppery-backend/src/main/resources/static"
+        angularProdBuildPath = "${rootDir}/reppery-frontend/build"
+        nodeModulesPath = "${rootDir}/reppery-frontend"
+
+        //dependency versions
+        springBootVersion = '2.0.3.RELEASE'
+        gradleNodeVersion = '1.2.0'
+        sonarcubeGradlePluginVersion = '2.6.2'
+        nodeVersion = '10.4.1'
+        npmVersion = '6.1.0'
+    }
+
     repositories {
         mavenCentral()
     }

@@ -1,8 +1,4 @@
 buildscript {
-    ext {
-        gradleNodeVersion = '1.2.0'
-    }
-
     repositories {
         mavenCentral()
 	 maven {
@@ -18,10 +14,10 @@ buildscript {
 apply plugin: 'com.moowork.node'
 
 node {
-    version = '10.4.1'
-    npmVersion = '6.1.0'
+    version = nodeVersion
+    npmVersion = npmVersion
     download = true
-    nodeModulesDir = file("${rootDir}/reppery-frontend")
+    nodeModulesDir = file(nodeModulesPath)
 }
 
 task buildAngularProd(type: NpmTask, dependsOn: 'npmInstall'){
@@ -34,5 +30,5 @@ task buildAngularProd(type: NpmTask, dependsOn: 'npmInstall'){
 task cleanAngularProd(type: Delete){
   group 'cleanup'
   description 'Deletes build frontend Angular application in production mode.'
-  delete "${rootDir}/reppery-frontend/build"
+  delete angularProdBuildPath
 }

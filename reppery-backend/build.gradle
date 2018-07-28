@@ -1,7 +1,4 @@
 buildscript {
-	ext {
-		springBootVersion = '2.0.3.RELEASE'
-	}
 	repositories {
 		mavenCentral()
 		maven {
@@ -10,7 +7,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath('org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2')
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarcubeGradlePluginVersion}")
 	}
 }
 
@@ -55,12 +52,12 @@ jacocoTestCoverageVerification {
 task cleanStaticResources(type: Delete){
 	group 'cleanup'
 	description 'Removes everything in reppery-backend/src/main/resources/static folder.'
-	delete "${rootDir}/reppery-backend/src/main/resources/static"
+	delete staticResourcesPath
 }
 
 task updateEmbeddedAngularClient(type: Copy){
 	group 'other'
 	description 'Copies prebuilt Angular client to reppery-backend/src/main/resources/static folder.'
-	from file("${rootDir}/reppery-frontend/build")
-	into file("${rootDir}/reppery-backend/src/main/resources/static")
+	from file(angularProdBuildPath)
+	into file(staticResourcesPath)
 }
