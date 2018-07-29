@@ -29,6 +29,9 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootDataStarterVersion}")
+	compile("org.postgresql:postgresql:${postgresqlVersion}")
+	compile("com.h2database:h2:${h2Version}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
