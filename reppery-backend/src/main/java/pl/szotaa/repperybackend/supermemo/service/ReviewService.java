@@ -1,15 +1,20 @@
 package pl.szotaa.repperybackend.supermemo.service;
 
 import java.time.LocalDate;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.AnswerPerformance;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewService {
+
+    private final FlashcardRepository repository;
 
     public void review(Flashcard flashcard, AnswerPerformance performance) {
         double percentOverdue = this.getPercentOverdue(flashcard, performance);
@@ -18,7 +23,7 @@ public class ReviewService {
         double difficultyWeight = 3 - 1.7 * calculatedDifficulty;
         double calculatedInterval = this.calculateInterval(flashcard.getInterval(), difficultyWeight, percentOverdue, performance);
         flashcard.setInterval(calculatedInterval);
-
+        repository.save(flashcard);
     }
 
     private double getPercentOverdue(Flashcard flashcard, AnswerPerformance performance){
