@@ -75,3 +75,7 @@ task serve(type: Exec){
 	description 'Runs Spring Boot with dev profile enabled.'
 	dependsOn bootRun
 }
+
+bootRun {
+	args = ["--spring.profiles.active=${bootRunSpringProfile}"]
+}
