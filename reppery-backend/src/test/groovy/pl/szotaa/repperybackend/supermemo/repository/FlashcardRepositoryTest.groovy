@@ -78,15 +78,11 @@ class FlashcardRepositoryTest extends Specification {
         testEntityManager.flush()
     }
 
-    def "FindAllByOrderByNextDueDateDesc method should return all flashcards ordered descending by date"(){
+    def "FindAllWithNextDueDateEqualToToday method should return all flashcards with nextDueDate equal to today's date"(){
         when:
-            def flashcardsList = repository.findAllByOrderByNextDueDateDesc()
+            def flashcardsList = repository.findAllWithNextDueDateEqualToToday()
         then:
-            flashcardsList.size() == 5
-            flashcardsList.get(0).title == "flashcard5"
-            flashcardsList.get(1).title == "flashcard4"
-            flashcardsList.get(2).title == "flashcard3"
-            flashcardsList.get(3).title == "flashcard2"
-            flashcardsList.get(4).title == "flashcard1"
+            flashcardsList.size() == 1
+            flashcardsList.get(0).title == "flashcard1"
     }
 }
