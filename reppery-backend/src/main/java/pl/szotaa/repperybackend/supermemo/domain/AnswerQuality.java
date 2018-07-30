@@ -1,11 +1,27 @@
 package pl.szotaa.repperybackend.supermemo.domain;
 
+/**
+ * Represents correctness of user answer.
+ *
+ * <ul>
+ *  <li>PERFECT - perfect answer</li>
+ *  <li>HESITATED - correct answer after a hesitation</li>
+ *  <li>DIFFICULT - correct answer recalled with serious difficulty</li>
+ *  <li>ALMOST - incorrect answer, where the correct one seemed easy to recall</li>
+ *  <li>INCORRECT - incorrect answer</li>
+ *  <li>BLACKOUT - complete blackout, no answer at all</li>
+ * </ul>
+ *
+ *
+ * @author szotaa
+ */
+
 public enum AnswerQuality {
 
     PERFECT(5),
-    CORRECT_HESITATION(4),
-    CORRECT_DIFFICLTY(3),
-    INCORRECT_ALMOST(2),
+    HESITATED(4),
+    DIFFICULT(3),
+    ALMOST(2),
     INCORRECT(1),
     BLACKOUT(0);
 
