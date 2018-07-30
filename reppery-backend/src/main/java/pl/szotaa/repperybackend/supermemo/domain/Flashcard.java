@@ -25,9 +25,14 @@ public class Flashcard implements Serializable {
     private String back;
 
     @Builder.Default
-    private Double difficulty = 0.3;
+    private Integer repetitions = 0;
 
-    private Double interval;
+    @Builder.Default
+    private Integer interval = 1;
 
-    private LocalDate lastReviewed;
+    @Builder.Default
+    private Double easiness = 2.5;
+
+    @Builder.Default
+    private LocalDate nextDueDate = LocalDate.now();
 }
