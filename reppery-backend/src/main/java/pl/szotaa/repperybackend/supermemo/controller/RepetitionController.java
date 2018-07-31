@@ -15,7 +15,7 @@ import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
-@RequestMapping("/api/repetition")
+@RequestMapping("/repetition")
 @RequiredArgsConstructor
 public class RepetitionController {
 
@@ -28,6 +28,7 @@ public class RepetitionController {
 
     @PostMapping("/{id}")
     public ResponseEntity<Void> processAnswer(@PathVariable Long id, @RequestBody AnswerQuality answerQuality){
+        flashcardService.processAnswer(id, answerQuality);
         return ResponseEntity.ok().build();
     }
 }
