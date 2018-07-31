@@ -1,23 +1,19 @@
-package pl.szotaa.repperybackend.supermemo.service
+package pl.szotaa.repperybackend.supermemo.domain
 
-import pl.szotaa.repperybackend.supermemo.domain.AnswerQuality
-import pl.szotaa.repperybackend.supermemo.domain.Flashcard
 import spock.lang.Specification
 
 import java.time.LocalDate
 
-class RepetitionServiceTest extends Specification {
-
-    def reviewService = new RepetitionService()
+class FlashcardTest extends Specification {
 
     def "Easiness should decrease with incorrect answers"(AnswerQuality answerQuality){
         given:
             def defaultEasiness = 2.5
             def flashcard = new Flashcard()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.easiness < defaultEasiness
+            flashcard.easiness < defaultEasiness
         where:
             answerQuality|_
             AnswerQuality.BLACKOUT|_
@@ -30,9 +26,9 @@ class RepetitionServiceTest extends Specification {
             def exampleEasiness = 2.0
             def flashcard = Flashcard.builder().easiness(exampleEasiness).build()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.easiness > exampleEasiness
+            flashcard.easiness > exampleEasiness
         where:
             answerQuality|_
             AnswerQuality.PERFECT|_
@@ -44,9 +40,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = new Flashcard()
         when:
-            def result = reviewService.processAnswer(flashcard, AnswerQuality.PERFECT)
+            flashcard.updateByAnswer(AnswerQuality.PERFECT)
         then:
-            result.easiness == 2.5
+            flashcard.easiness == 2.5
     }
 
     def "Easiness variable should never be lower than 1.3"(){
@@ -54,18 +50,18 @@ class RepetitionServiceTest extends Specification {
             def lowestPossibleEasiness = 1.3
             def flashcard = Flashcard.builder().easiness(lowestPossibleEasiness).build()
         when:
-            def result = reviewService.processAnswer(flashcard, AnswerQuality.BLACKOUT)
+            flashcard.updateByAnswer(AnswerQuality.BLACKOUT)
         then:
-            result.easiness == 1.3
+            flashcard.easiness == 1.3
     }
 
     def "Repetitions should be set to 0 on incorrect answer"(AnswerQuality answerQuality){
         given:
             def flashcard = new Flashcard()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.repetitions == 0
+            flashcard.repetitions == 0
         where:
             answerQuality|_
             AnswerQuality.BLACKOUT|_
@@ -77,9 +73,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = new Flashcard()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.repetitions > 0
+            flashcard.repetitions > 0
         where:
             answerQuality|_
             AnswerQuality.PERFECT|_
@@ -91,9 +87,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = Flashcard.builder().repetitions(5).build()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.interval > 1
+            flashcard.interval > 1
         where:
             answerQuality|_
             AnswerQuality.PERFECT|_
@@ -105,9 +101,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = Flashcard.builder().repetitions(5).build()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.interval == 1
+            flashcard.interval == 1
         where:
             answerQuality|_
             AnswerQuality.BLACKOUT|_
@@ -119,9 +115,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = Flashcard.builder().repetitions(5).build()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.nextDueDate == LocalDate.now().plusDays(1)
+            flashcard.nextDueDate == LocalDate.now().plusDays(1)
         where:
             answerQuality|_
             AnswerQuality.BLACKOUT|_
@@ -133,9 +129,9 @@ class RepetitionServiceTest extends Specification {
         given:
             def flashcard = Flashcard.builder().repetitions(5).build()
         when:
-            def result = reviewService.processAnswer(flashcard, answerQuality)
+            flashcard.updateByAnswer(answerQuality)
         then:
-            result.nextDueDate > LocalDate.now().plusDays(1)
+            flashcard.nextDueDate > LocalDate.now().plusDays(1)
         where:
             answerQuality|_
             AnswerQuality.PERFECT|_

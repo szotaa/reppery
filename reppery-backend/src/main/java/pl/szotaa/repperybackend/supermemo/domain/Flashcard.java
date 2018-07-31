@@ -52,4 +52,46 @@ public class Flashcard implements Serializable {
     @Builder.Default
     @Column(name = "next_due_date")
     private LocalDate nextDueDate = LocalDate.now();
+
+    public void updateByAnswer(AnswerQuality answerQuality){
+        int answerValue = answerQuality.getValue();
+        this.easiness = this.recalculateEasiness(answerValue);
+        this.repetitions = this.recalculateRepetitions(answerValue);
+        this.interval = this.recalculateInterval();
+        this.nextDueDate = this.recalculateNextDueDate();
+    }
+
+    private double recalculateEasiness(int answerQualityValue){
+        int subtractedValue = 5 - answerQualityValue;
+        double easiness = this.easiness + 0.1 - subtractedValue * (0.08 + subtractedValue) * 0.02;
+        if(easiness > 2.5){
+            return 2.5;
+        } else if (easiness < 1.3){
+            return 1.3;
+        } else {
+            return easiness;
+        }
+    }
+
+    private int recalculateRepetitions(int answerQualityValue){
+        if(answerQualityValue < 3){
+            return 0;
+        } else {
+            return this.repetitions + 1;
+        }
+    }
+
+    private int recalculateInterval(){
+        if(this.repetitions <= 1){
+            return 1;
+        } else if (this.repetitions == 2){
+            return 6;
+        } else {
+            return (int) Math.round(this.interval * easiness);
+        }
+    }
+
+    private LocalDate recalculateNextDueDate(){
+        return LocalDate.now().plusDays(this.interval);
+    }
 }
