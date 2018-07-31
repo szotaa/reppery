@@ -18,4 +18,15 @@ class AnswerQualityTest extends Specification {
             4 | AnswerQuality.HESITATED
             5 | AnswerQuality.PERFECT
     }
+
+    def "GetValue throws IllegalArgumentException for values other than from [0:5] range inclusive"(int value){
+        when:
+            AnswerQuality.getFromValue(value)
+        then:
+            thrown(IllegalArgumentException)
+        where:
+            value|_
+            -1|_
+             6|_
+    }
 }
