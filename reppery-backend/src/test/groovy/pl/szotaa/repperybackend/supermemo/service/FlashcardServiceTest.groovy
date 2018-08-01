@@ -98,7 +98,8 @@ class FlashcardServiceTest extends Specification {
     def "Update with non existent id throws exception"(){
         given:
             def id = 5
-            def flashcard = Flashcard.builder().id(id).build()
+            def flashcard = new Flashcard()
+            flashcard.setId(id)
             flashcardRepository.existsById(_) >> {false}
         when:
             flashcardService.update(flashcard)

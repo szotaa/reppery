@@ -1,5 +1,6 @@
 package pl.szotaa.repperybackend.supermemo.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -8,11 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 
 @Getter
 @Setter
@@ -21,36 +25,42 @@ import lombok.Setter;
 @Table(name = "flashcards")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Flashcard implements Serializable {
+public class Flashcard extends AbstractEntity implements Serializable {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-
+    @NotNull
     @Column(name = "title")
     private String title;
 
+    @NotEmpty
     @Column(name = "front")
     private String front;
 
+    @NotEmpty
     @Column(name = "back")
     private String back;
 
+    @NotNull
     @Builder.Default
     @Column(name = "repetitions")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer repetitions = 0;
 
+    @NotNull
     @Builder.Default
     @Column(name = "interval")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer interval = 1;
 
+    @NotNull
     @Builder.Default
     @Column(name = "easiness")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Double easiness = 2.5;
 
+    @NotNull
     @Builder.Default
     @Column(name = "next_due_date")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate nextDueDate = LocalDate.now();
 
     public void updateByAnswer(AnswerQuality answerQuality){
