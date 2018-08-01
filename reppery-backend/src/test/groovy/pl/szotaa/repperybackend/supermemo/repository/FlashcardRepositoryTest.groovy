@@ -78,9 +78,9 @@ class FlashcardRepositoryTest extends Specification {
         testEntityManager.flush()
     }
 
-    def "FindAllWithNextDueDateEqualToToday method should return all flashcards with nextDueDate equal to today's date"(){
+    def "FindAllWithNextDueDateBeforeOrEqualCurrentDate method should return all flashcards with nextDueDate equal to today's date"(){
         when:
-            def flashcardsList = repository.findAllWithNextDueDateEqualToToday()
+            def flashcardsList = repository.findAllWithNextDueDateBeforeOrEqualCurrentDate()
         then:
             flashcardsList.size() == 1
             flashcardsList.get(0).title == "flashcard1"

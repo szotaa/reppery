@@ -17,7 +17,7 @@ public class FlashcardService {
 
     public List<Flashcard> findForRepetiton(int limit){
         return repository
-                .findAllWithNextDueDateEqualToToday()
+                .findAllWithNextDueDateBeforeOrEqualCurrentDate()
                 .stream()
                 .limit(limit)
                 .collect(Collectors.toList());

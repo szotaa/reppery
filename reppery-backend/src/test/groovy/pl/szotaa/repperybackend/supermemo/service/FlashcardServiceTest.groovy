@@ -16,7 +16,7 @@ class FlashcardServiceTest extends Specification {
         given:
             def flashcards = [new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard()]
             def limit = 2
-            flashcardRepository.findAllWithNextDueDateEqualToToday() >> flashcards
+            flashcardRepository.findAllWithNextDueDateBeforeOrEqualCurrentDate() >> flashcards
         when:
             def result = flashcardService.findForRepetiton(limit)
         then:
