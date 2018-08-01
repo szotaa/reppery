@@ -14,7 +14,7 @@ public class FlashcardService {
 
     private final FlashcardRepository repository;
 
-    public List<Flashcard> findFlashcardsForRepetiton(int limit){
+    public List<Flashcard> findForRepetiton(int limit){
         return repository
                 .findAllWithNextDueDateEqualToToday()
                 .stream()
@@ -22,9 +22,33 @@ public class FlashcardService {
                 .collect(Collectors.toList());
     }
 
-    public void processAnswer(Long id, AnswerQuality answerQuality){
+    public void processAnswer(long id, AnswerQuality answerQuality){
         Flashcard flashcard = repository.findById(id).orElseThrow(RuntimeException::new); //TODO: dedicated exception
         flashcard.updateByAnswer(answerQuality);
         repository.save(flashcard);
+    }
+
+    public Flashcard findById(long id){
+        return repository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public void add(Flashcard flashcard){
+        repository.save(flashcard);
+    }
+
+    public void update(Flashcard flashcard){
+        if(repository.existsById(flashcard.getId())){
+            repository.save(flashcard);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    public void delete(long id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
