@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.szotaa.repperybackend.supermemo.domain.AnswerQuality;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
@@ -27,7 +28,8 @@ public class RepetitionController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Void> processAnswer(@PathVariable Long id, @RequestBody AnswerQuality answerQuality){
+    public ResponseEntity<Void> processAnswer(@PathVariable Long id, @RequestBody AnswerQuality answerQuality)
+            throws FlashcardNotFoundException {
         flashcardService.processAnswer(id, answerQuality);
         return ResponseEntity.ok().build();
     }

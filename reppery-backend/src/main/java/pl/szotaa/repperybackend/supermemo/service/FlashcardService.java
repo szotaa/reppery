@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.AnswerQuality;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 
 @Service
@@ -22,33 +23,33 @@ public class FlashcardService {
                 .collect(Collectors.toList());
     }
 
-    public void processAnswer(long id, AnswerQuality answerQuality){
-        Flashcard flashcard = repository.findById(id).orElseThrow(RuntimeException::new); //TODO: dedicated exception
+    public void processAnswer(long id, AnswerQuality answerQuality) throws FlashcardNotFoundException {
+        Flashcard flashcard = repository.findById(id).orElseThrow(FlashcardNotFoundException::new);
         flashcard.updateByAnswer(answerQuality);
         repository.save(flashcard);
     }
 
-    public Flashcard findById(long id){
-        return repository.findById(id).orElseThrow(RuntimeException::new);
+    public Flashcard findById(long id) throws FlashcardNotFoundException {
+        return repository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
     public void add(Flashcard flashcard){
         repository.save(flashcard);
     }
 
-    public void update(Flashcard flashcard){
+    public void update(Flashcard flashcard) throws FlashcardNotFoundException {
         if(repository.existsById(flashcard.getId())){
             repository.save(flashcard);
         } else {
-            throw new RuntimeException();
+            throw new FlashcardNotFoundException();
         }
     }
 
-    public void delete(long id){
+    public void delete(long id) throws FlashcardNotFoundException {
         if(repository.existsById(id)){
             repository.deleteById(id);
         } else {
-            throw new RuntimeException();
+            throw new FlashcardNotFoundException();
         }
     }
 }

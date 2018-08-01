@@ -23,7 +23,7 @@ class RepetitionControllerTest extends Specification {
         given:
             def limit = 5
             def flashcards = [new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard()]
-            1 * flashcardService.findFlashcardsForRepetiton(_) >> {flashcards}
+            1 * flashcardService.findForRepetiton(_) >> {flashcards}
         when:
             def response = mockMvc.perform(get("/repetition")
                                     .param("limit", limit.toString()))
