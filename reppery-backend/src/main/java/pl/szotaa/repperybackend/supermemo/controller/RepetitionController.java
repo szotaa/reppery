@@ -23,7 +23,7 @@ public class RepetitionController {
 
     @GetMapping
     public ResponseEntity<List<Flashcard>> getTodaysRepetition(@RequestParam int limit){
-        return ResponseEntity.ok(flashcardService.findFlashcardsForRepetiton(limit));
+        return ResponseEntity.ok(flashcardService.findForRepetiton(limit));
     }
 
     @PostMapping("/{id}")
