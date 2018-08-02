@@ -30,6 +30,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootDataStarterVersion}")
+	compile("org.springframework.boot:spring-boot-starter-security:${springBootStarterSecurity}")
 	compile("org.postgresql:postgresql:${postgresqlVersion}")
 	compile("com.h2database:h2:${h2Version}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
