@@ -22,6 +22,7 @@ allprojects {
         spockSpringVersion = '1.1-groovy-2.4'
         postgresqlVersion = '42.2.4'
         h2Version = '1.4.197'
+        jjwtVersion = '0.9.1'
 
         //other
         bootRunSpringProfile = 'dev'
