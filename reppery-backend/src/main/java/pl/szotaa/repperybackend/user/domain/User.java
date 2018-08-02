@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.szotaa.repperybackend.common.entity.AbstractEntity;
@@ -28,6 +29,7 @@ import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 @Setter
 @Entity
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
@@ -41,6 +43,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
     private String email;
 
     @NotEmpty
+    @ToString.Exclude
     @Column(name = "password", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -59,6 +62,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @JsonIgnore
     @Builder.Default
+    @ToString.Exclude
     private String emailActivationToken = generateEmailActivationToken();
 
     @Override

@@ -14,12 +14,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 
 @Getter
 @Setter
 @Entity
 @Builder
+@ToString
 @Table(name = "flashcards")
 @NoArgsConstructor
 @AllArgsConstructor
