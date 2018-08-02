@@ -16,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,10 +31,12 @@ import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @Email
     @NotEmpty
+    @EqualsAndHashCode.Include
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
@@ -56,7 +59,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @JsonIgnore
     @Builder.Default
-    private String emailActivationToken = this.generateEmailActivationToken();
+    private String emailActivationToken = generateEmailActivationToken();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,7 +91,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
         return this.isEnabled;
     }
 
-    private String generateEmailActivationToken(){
+    private static String generateEmailActivationToken(){
         return UUID.randomUUID().toString();
     }
 }

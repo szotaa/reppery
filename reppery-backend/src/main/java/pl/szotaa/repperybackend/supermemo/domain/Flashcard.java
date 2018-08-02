@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 @Table(name = "flashcards")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Flashcard extends AbstractEntity implements Serializable {
 
     @NotNull

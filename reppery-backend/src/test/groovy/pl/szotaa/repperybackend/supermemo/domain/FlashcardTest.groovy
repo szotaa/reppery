@@ -138,4 +138,30 @@ class FlashcardTest extends Specification {
             AnswerQuality.HESITATED|_
             AnswerQuality.DIFFICULT|_
     }
+
+    def "Equals and hashCode methods contract test"(){
+        given:
+            def flashcard = Flashcard.builder()
+                    .title("title")
+                    .front("front")
+                    .back("back")
+                    .build()
+
+            def equalFlashcard = Flashcard.builder()
+                    .title("title")
+                    .front("front")
+                    .back("back")
+                    .build()
+
+            def notEqualFlashcard = Flashcard.builder()
+                    .title("otherTitle")
+                    .front("front")
+                    .back("back")
+                    .build()
+        expect:
+            flashcard.equals(equalFlashcard)
+            !flashcard.equals(notEqualFlashcard)
+            flashcard.hashCode() == equalFlashcard.hashCode()
+            flashcard.hashCode() != notEqualFlashcard.hashCode()
+    }
 }
