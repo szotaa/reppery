@@ -25,7 +25,7 @@ public abstract class AbstractEntity {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Long id;
+    protected Long id;
 
     @CreationTimestamp
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
