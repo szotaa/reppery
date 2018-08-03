@@ -6,9 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 import pl.szotaa.repperybackend.user.domain.Role;
@@ -21,6 +23,9 @@ public class DatabasePopulater implements ApplicationRunner {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -60,16 +65,19 @@ public class DatabasePopulater implements ApplicationRunner {
     }
 
     private List<User> getMockUsers(){
+
+        String encodedPassword = passwordEncoder.encode("password");
+
         User user = User.builder()
                 .email("user@email.com")
-                .password("password")
+                .password(encodedPassword)
                 .isEnabled(true)
                 .emailActivationToken(null)
                 .build();
 
         User admin = User.builder()
                 .email("admin@email.com")
-                .password("password")
+                .password(encodedPassword)
                 .role(Role.ROLE_ADMIN)
                 .isEnabled(true)
                 .emailActivationToken(null)
@@ -77,7 +85,7 @@ public class DatabasePopulater implements ApplicationRunner {
 
         User notYetVerified = User.builder()
                 .email("notVerified@email.com")
-                .password("password")
+                .password(encodedPassword)
                 .build();
 
         return Arrays.asList(
