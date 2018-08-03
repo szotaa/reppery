@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.common.config;
+package pl.szotaa.repperybackend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
