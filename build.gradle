@@ -23,6 +23,7 @@ allprojects {
         postgresqlVersion = '42.2.4'
         h2Version = '1.4.197'
         jjwtVersion = '0.9.1'
+        springFoxVersion = '2.9.2'
 
         //other
         bootRunSpringProfile = 'dev'

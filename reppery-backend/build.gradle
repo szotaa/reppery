@@ -35,6 +35,7 @@ dependencies {
 	compile("com.h2database:h2:${h2Version}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
 	compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
+	compile("io.springfox:springfox-swagger2:${springFoxVersion}")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile("org.codehaus.groovy:groovy-all:${groovyVersion}")
 	testCompile("org.spockframework:spock-core:${spockCoreVersion}")
