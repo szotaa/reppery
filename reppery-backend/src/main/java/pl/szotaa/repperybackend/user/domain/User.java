@@ -77,17 +77,17 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false; //account expiration not supported
+        return true; //account expiration not supported
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false; //account locking not supported
+        return true; //account locking not supported
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false; //credentials expiration not supported
+        return true; //credentials expiration not supported
     }
 
     @Override
