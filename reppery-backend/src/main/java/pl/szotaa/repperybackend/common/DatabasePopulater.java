@@ -84,6 +84,6 @@ public class DatabasePopulater implements ApplicationRunner {
                 user,
                 admin,
                 notYetVerified
-        )
+        );
     }
 }
