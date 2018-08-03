@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationManager getAuthenticationManager() throws Exception {
-        return super.authenticationManager();
+        return super.authenticationManagerBean();
     }
 
     @Configuration
