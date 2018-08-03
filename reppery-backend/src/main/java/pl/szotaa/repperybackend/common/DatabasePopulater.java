@@ -11,6 +11,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.user.domain.Role;
+import pl.szotaa.repperybackend.user.domain.User;
 
 @Component
 @Profile("dev")
@@ -23,6 +25,7 @@ public class DatabasePopulater implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         this.getMockFlashcards().forEach(entityManager::persist);
+        this.getMockUsers().forEach(entityManager::persist);
     }
 
     private List<Flashcard> getMockFlashcards(){
@@ -54,5 +57,33 @@ public class DatabasePopulater implements ApplicationRunner {
                 yesterdaysFlashcard,
                 todaysFlashcard,
                 tommorowsFlashcard);
+    }
+
+    private List<User> getMockUsers(){
+        User user = User.builder()
+                .email("user@email.com")
+                .password("password")
+                .isEnabled(true)
+                .emailActivationToken(null)
+                .build();
+
+        User admin = User.builder()
+                .email("admin@email.com")
+                .password("password")
+                .role(Role.ROLE_ADMIN)
+                .isEnabled(true)
+                .emailActivationToken(null)
+                .build();
+
+        User notYetVerified = User.builder()
+                .email("notVerified@email.com")
+                .password("password")
+                .build();
+
+        return Arrays.asList(
+                user,
+                admin,
+                notYetVerified
+        )
     }
 }
