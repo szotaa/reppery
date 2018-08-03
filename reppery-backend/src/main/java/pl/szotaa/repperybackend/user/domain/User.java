@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -33,7 +34,6 @@ import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @Email
@@ -93,6 +93,32 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
     @Override
     public boolean isEnabled() {
         return this.isEnabled;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.email = this.email.toLowerCase();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof User)){
+            return false;
+        }
+        User user = (User) o;
+        if(!(user.getEmail().toLowerCase().equals(this.email.toLowerCase()))){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.email.toLowerCase().hashCode();
+        return result * 31;
     }
 
     private static String generateEmailActivationToken(){
