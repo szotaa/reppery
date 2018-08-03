@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.auth.filter;
+package pl.szotaa.repperybackend.auth.jwt;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import pl.szotaa.repperybackend.auth.JwtTokenUtil;
 import pl.szotaa.repperybackend.user.domain.User;
 import pl.szotaa.repperybackend.user.service.UserService;
 

@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.auth;
+package pl.szotaa.repperybackend.auth.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,16 +17,18 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    public String getJwtToken(Authentication auth){
+    public JwtToken getJwtToken(Authentication auth){
         User user = (User) auth.getPrincipal();
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationTimeMs);
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
+
+        return new JwtToken(token);
     }
 
     public String getUsernameFromJwt(String token){

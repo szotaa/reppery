@@ -1,21 +1,20 @@
-package pl.szotaa.repperybackend.auth.service;
+package pl.szotaa.repperybackend.auth.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
-import pl.szotaa.repperybackend.auth.JwtTokenUtil;
+import org.springframework.stereotype.Component;
 import pl.szotaa.repperybackend.user.domain.User;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class JwtAuthenticationService {
+public class JwtTokenFactory {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
 
-    public String getAuthenticatedJwtToken(User user){
+    public JwtToken getJwtToken(User user){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
