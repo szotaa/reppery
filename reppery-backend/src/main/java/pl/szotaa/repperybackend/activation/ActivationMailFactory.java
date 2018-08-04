@@ -1,14 +1,16 @@
-package pl.szotaa.repperybackend.mail.domain;
+package pl.szotaa.repperybackend.activation;
 
 import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import pl.szotaa.repperybackend.user.domain.User;
 
+@Component
 public class ActivationMailFactory {
 
     private static final Email FROM = new Email("noreply@reppery.com");
