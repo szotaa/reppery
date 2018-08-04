@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.common;
+package pl.szotaa.repperybackend.bootstrap;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import pl.szotaa.repperybackend.user.domain.User;
 @Component
 @Profile("dev")
 @Transactional
-public class DatabasePopulater implements ApplicationRunner {
+public class MockDataDatabaseInjector implements ApplicationRunner {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -85,6 +85,7 @@ public class DatabasePopulater implements ApplicationRunner {
 
         User notYetVerified = User.builder()
                 .email("notVerified@email.com")
+                .emailActivationToken("emailActivationToken")
                 .password(encodedPassword)
                 .build();
 
