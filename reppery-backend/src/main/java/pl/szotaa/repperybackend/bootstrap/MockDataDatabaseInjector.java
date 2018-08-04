@@ -4,9 +4,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
@@ -19,13 +18,11 @@ import pl.szotaa.repperybackend.user.domain.User;
 @Component
 @Profile("dev")
 @Transactional
+@RequiredArgsConstructor
 public class MockDataDatabaseInjector implements ApplicationRunner {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final EntityManager entityManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
