@@ -28,9 +28,10 @@ repositories {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootDataStarterVersion}")
-	compile("org.springframework.boot:spring-boot-starter-security:${springBootStarterSecurity}")
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
 	compile("org.postgresql:postgresql:${postgresqlVersion}")
 	compile("com.h2database:h2:${h2Version}")
 	compile("org.projectlombok:lombok:${lombokVersion}")
