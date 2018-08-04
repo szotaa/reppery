@@ -2,6 +2,7 @@ package pl.szotaa.repperybackend.user.service
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
+import pl.szotaa.repperybackend.activation.service.ActivationService
 import pl.szotaa.repperybackend.user.domain.User
 import pl.szotaa.repperybackend.user.repository.UserRepository
 import spock.lang.Specification
@@ -10,7 +11,8 @@ class UserServiceTest extends Specification {
 
     def userRepository = Mock(UserRepository)
     def passwordEncoder = Mock(PasswordEncoder)
-    def userService = new UserService(userRepository, passwordEncoder)
+    def activationService = Mock(ActivationService)
+    def userService = new UserService(userRepository, passwordEncoder, activationService)
 
     def "Register method should encode password"(){
         given:
