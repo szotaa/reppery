@@ -57,12 +57,14 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
     @NotNull
     @Builder.Default
     @Enumerated(EnumType.ORDINAL)
+    @Column(name = "role", nullable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Role role = Role.ROLE_USER;
 
     @JsonIgnore
     @Builder.Default
     @ToString.Exclude
+    @Column(name = "email_activation_token", unique = true)
     private String emailActivationToken = generateEmailActivationToken();
 
     @Override
