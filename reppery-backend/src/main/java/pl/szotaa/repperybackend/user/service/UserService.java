@@ -32,6 +32,16 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void activate(String emailActivationToken){
+        User user = this.userRepository
+                .findUserByEmailActivationToken(emailActivationToken)
+                .orElseThrow(RuntimeException::new); // TODO: dedicated exception
+
+        user.setEmailActivationToken(null);
+        user.setIsEnabled(true);
+        this.userRepository.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
