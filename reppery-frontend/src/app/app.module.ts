@@ -5,11 +5,15 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './common/footer/footer.component';
+import { NavigationComponent } from './common/navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
