@@ -12,7 +12,6 @@ allprojects {
         springBootVersion = '2.0.3.RELEASE'
         springBootDataStarterVersion = '2.0.3.RELEASE'
         springBootStarterSecurity = '2.0.3.RELEASE'
-        springBootMailStarterVersion = '2.0.3.RELEASE'
         gradleNodeVersion = '1.2.0'
         sonarcubeGradlePluginVersion = '2.6.2'
         nodeVersion = '10.4.1'
@@ -25,6 +24,7 @@ allprojects {
         h2Version = '1.4.197'
         jjwtVersion = '0.9.1'
         springFoxVersion = '2.9.2'
+        sendGridVersion = '4.2.1'
 
         //other
         bootRunSpringProfile = 'dev'
