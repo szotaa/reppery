@@ -2,7 +2,10 @@ package pl.szotaa.repperybackend.bootstrap;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +14,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.supermemo.domain.Group;
 import pl.szotaa.repperybackend.user.domain.Role;
 import pl.szotaa.repperybackend.user.domain.User;
 
@@ -26,12 +31,11 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        this.getMockFlashcards().forEach(entityManager::persist);
-        this.getMockUsers().forEach(entityManager::persist);
+        this.getMockData().forEach(entityManager::persist);
     }
 
-    private List<Flashcard> getMockFlashcards(){
-        Flashcard yesterdaysFlashcard = Flashcard.builder()
+    private List<AbstractEntity> getMockData(){
+        Flashcard flashcard1 = Flashcard.builder()
                 .title("yesterdaysFlashcard")
                 .front("front")
                 .back("back")
@@ -39,7 +43,7 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 .nextDueDate(LocalDate.now().minusDays(1))
                 .build();
 
-        Flashcard todaysFlashcard = Flashcard.builder()
+        Flashcard flashcard2 = Flashcard.builder()
                 .title("todaysFlashcard")
                 .front("front")
                 .back("back")
@@ -47,7 +51,7 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 .nextDueDate(LocalDate.now())
                 .build();
 
-        Flashcard tommorowsFlashcard = Flashcard.builder()
+        Flashcard flashcard3 = Flashcard.builder()
                 .title("tommorowsFlashcard")
                 .front("front")
                 .back("back")
@@ -55,13 +59,36 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 .nextDueDate(LocalDate.now().plusDays(1))
                 .build();
 
-        return Arrays.asList(
-                yesterdaysFlashcard,
-                todaysFlashcard,
-                tommorowsFlashcard);
-    }
+        Flashcard flashcard4 = Flashcard.builder()
+                .title("flashcard4")
+                .front("front")
+                .back("back")
+                .repetitions(5)
+                .nextDueDate(LocalDate.now().plusDays(1))
+                .build();
 
-    private List<User> getMockUsers(){
+        Flashcard flashcard5 = Flashcard.builder()
+                .title("flashcard5")
+                .front("front")
+                .back("back")
+                .repetitions(5)
+                .nextDueDate(LocalDate.now().plusDays(1))
+                .build();
+
+        Set<Flashcard> flashcards = new HashSet<>(
+                Arrays.asList(
+                        flashcard1,
+                        flashcard2,
+                        flashcard3
+                )
+        );
+
+        Set<Flashcard> adminFlashcards = new HashSet<>(
+                Arrays.asList(
+                        flashcard4,
+                        flashcard5
+                )
+        );
 
         String encodedPassword = passwordEncoder.encode("password");
 
@@ -86,10 +113,30 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 .password(encodedPassword)
                 .build();
 
+        Group group1 = Group.builder()
+                .title("flashcards")
+                .flashcards(flashcards)
+                .owner(user)
+                .build();
+
+        Group group2 = Group.builder()
+                .title("admin flashcards")
+                .flashcards(adminFlashcards)
+                .owner(admin)
+                .build();
+
+
         return Arrays.asList(
                 user,
                 admin,
-                notYetVerified
+                notYetVerified,
+                flashcard1,
+                flashcard2,
+                flashcard3,
+                flashcard4,
+                flashcard5,
+                group1,
+                group2
         );
     }
 }
