@@ -62,6 +62,12 @@ jacocoTestCoverageVerification {
 	}
 }
 
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 task cleanStaticResources(type: Delete){
 	group 'cleanup'
 	description 'Removes everything in reppery-backend/src/main/resources/static folder.'
