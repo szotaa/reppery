@@ -11,7 +11,7 @@ import pl.szotaa.repperybackend.auth.service.AuthService;
 import pl.szotaa.repperybackend.user.domain.User;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 

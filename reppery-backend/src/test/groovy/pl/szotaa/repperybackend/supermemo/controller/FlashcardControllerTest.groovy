@@ -35,9 +35,9 @@ class FlashcardControllerTest extends Specification {
             response.andExpect(status().isOk())
     }
 
-    def "GET request on /flashcard/{id} should execute flashcardService.findById"(){
+    def "GET request on /api/flashcard/{id} should execute flashcardService.findById"(){
         when:
-            def response = mockMvc.perform(get("/flashcard/5"))
+            def response = mockMvc.perform(get("/api/flashcard/5"))
         then:
             response.andExpect(status().isOk())
             1 * flashcardService.findById(_ as Long)
@@ -57,9 +57,9 @@ class FlashcardControllerTest extends Specification {
             1 * flashcardService.update(_)
     }
 
-    def "DELETE request on /flashcard/{id} should execute flashcardService.delete"(){
+    def "DELETE request on /api/flashcard/{id} should execute flashcardService.delete"(){
         when:
-            def response = mockMvc.perform(delete("/flashcard/5"))
+            def response = mockMvc.perform(delete("/api/flashcard/5"))
         then:
             response.andExpect(status().isOk())
             1 * flashcardService.delete(_ as Long)

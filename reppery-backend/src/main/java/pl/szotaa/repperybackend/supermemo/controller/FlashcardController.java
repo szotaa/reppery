@@ -16,7 +16,7 @@ import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/flashcard")
+@RequestMapping("/api/flashcard")
 public class FlashcardController {
 
     private final FlashcardService flashcardService;

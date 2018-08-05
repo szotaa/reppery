@@ -11,7 +11,7 @@ import pl.szotaa.repperybackend.activation.service.ActivationService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/activate")
+@RequestMapping("/api/activate")
 public class ActivationController {
 
     private final ActivationService activationService;

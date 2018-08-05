@@ -19,13 +19,13 @@ class RepetitionControllerTest extends Specification {
     def repetitionController = new RepetitionController(flashcardService)
     def mockMvc = MockMvcBuilders.standaloneSetup(repetitionController).build()
 
-    def "GET request to /repetition?limit=5 should ask FlashcardService for today's review items"(){
+    def "GET request to /api/repetition?limit=5 should ask FlashcardService for today's review items"(){
         given:
             def limit = 5
             def flashcards = [new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard()]
             1 * flashcardService.findForRepetiton(_) >> {flashcards}
         when:
-            def response = mockMvc.perform(get("/repetition")
+            def response = mockMvc.perform(get("/api/repetition")
                                     .param("limit", limit.toString()))
         then:
             response.andExpect(status().isOk())

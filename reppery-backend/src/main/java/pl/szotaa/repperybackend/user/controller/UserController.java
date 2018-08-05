@@ -11,7 +11,7 @@ import pl.szotaa.repperybackend.user.exception.EmailAlreadyTakenException;
 import pl.szotaa.repperybackend.user.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 

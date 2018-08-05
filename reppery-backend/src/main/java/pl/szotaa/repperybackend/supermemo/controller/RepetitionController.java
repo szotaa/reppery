@@ -16,7 +16,7 @@ import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
-@RequestMapping("/repetition")
+@RequestMapping("/api/repetition")
 @RequiredArgsConstructor
 public class RepetitionController {
 
