@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
+import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
@@ -22,8 +24,9 @@ public class FlashcardController {
     private final FlashcardService flashcardService;
 
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody Flashcard flashcard){
-        flashcardService.add(flashcard);
+    public ResponseEntity<Void> add(@RequestBody Flashcard flashcard, @RequestParam("group") long groupId)
+            throws GroupNotFoundException {
+        flashcardService.add(flashcard, groupId);
         return ResponseEntity.ok().build();
     }
 

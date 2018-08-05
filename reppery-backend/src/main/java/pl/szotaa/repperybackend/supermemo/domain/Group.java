@@ -1,5 +1,7 @@
 package pl.szotaa.repperybackend.supermemo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,16 +37,18 @@ public class Group extends AbstractEntity implements Serializable {
 
     @NotNull
     @EqualsAndHashCode.Include
-    @Column(name = "title", nullable = false, unique = true)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @NotNull
     @Builder.Default
     @JoinColumn(name = "group_id")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flashcard> flashcards = new HashSet<>();
 
     @NotNull
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
 }

@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.Group;
+import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.GroupRepository;
 import pl.szotaa.repperybackend.user.domain.User;
 
@@ -20,10 +21,14 @@ public class GroupService {
         groupRepository.save(group);
     }
 
+    public Group getById(long id) throws GroupNotFoundException {
+        return groupRepository.findById(id).orElseThrow(GroupNotFoundException::new);
+    }
+
     private User getCurrentUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> optional = Optional.ofNullable((User) auth.getPrincipal());
-        return optional.orElseThrow(() -> {
+        return optional.<IllegalStateException>orElseThrow(() -> {
             throw new IllegalStateException("Principal object is null.");
         });
     }

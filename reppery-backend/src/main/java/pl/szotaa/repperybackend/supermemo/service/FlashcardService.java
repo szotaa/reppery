@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.AnswerQuality;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import pl.szotaa.repperybackend.supermemo.domain.Group;
 import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
+import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 
 @Service
@@ -14,6 +16,7 @@ import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 public class FlashcardService {
 
     private final FlashcardRepository repository;
+    private final GroupService groupService;
 
     public List<Flashcard> findForRepetiton(int limit){
         return repository
@@ -33,7 +36,9 @@ public class FlashcardService {
         return repository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
-    public void add(Flashcard flashcard){
+    public void add(Flashcard flashcard, long groupId) throws GroupNotFoundException {
+        Group group = groupService.getById(groupId);
+        group.getFlashcards().add(flashcard);
         repository.save(flashcard);
     }
 
