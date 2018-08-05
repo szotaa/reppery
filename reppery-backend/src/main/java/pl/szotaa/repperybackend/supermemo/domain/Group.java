@@ -41,9 +41,9 @@ public class Group extends AbstractEntity implements Serializable {
     private String title;
 
     @NotNull
+    @JsonIgnore
     @Builder.Default
     @JoinColumn(name = "group_id")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flashcard> flashcards = new HashSet<>();
 

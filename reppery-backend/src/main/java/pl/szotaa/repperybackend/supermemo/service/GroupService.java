@@ -1,5 +1,6 @@
 package pl.szotaa.repperybackend.supermemo.service;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,10 @@ public class GroupService {
 
     public Group getById(long id) throws GroupNotFoundException {
         return groupRepository.findById(id).orElseThrow(GroupNotFoundException::new);
+    }
+
+    public List<Group> getAllGroupsOwnedByCurrentUser(){
+        return groupRepository.getAllByOwner(this.getCurrentUser());
     }
 
     private User getCurrentUser(){
