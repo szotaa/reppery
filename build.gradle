@@ -39,7 +39,7 @@ task stage(type: GradleBuild) {
 
     setTasks(['reppery-frontend:buildAngularProd',
               'reppery-backend:updateEmbeddedAngularClient',
-              'reppery-backend:build'])
+              'reppery-backend:bootJar'])
 
     finalizedBy 'reppery-backend:cleanStaticResources'
     finalizedBy 'reppery-frontend:cleanAngularProd'
