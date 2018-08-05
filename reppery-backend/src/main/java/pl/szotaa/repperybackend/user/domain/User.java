@@ -5,11 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -25,6 +28,7 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.szotaa.repperybackend.common.entity.AbstractEntity;
+import pl.szotaa.repperybackend.supermemo.domain.Group;
 
 @Getter
 @Setter
@@ -66,6 +70,12 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
     @ToString.Exclude
     @Column(name = "email_activation_token", unique = true)
     private String emailActivationToken = generateEmailActivationToken();
+
+    @NotNull
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "owner", orphanRemoval = true)
+    private Set<Group> groups = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
