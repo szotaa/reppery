@@ -1,35 +1,30 @@
 package pl.szotaa.repperybackend.supermemo.controller
 
-
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard
-import pl.szotaa.repperybackend.supermemo.service.FlashcardService
+import pl.szotaa.repperybackend.supermemo.service.RevisionService
 import spock.lang.Ignore
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class RevisionControllerTest extends Specification {
 
-    def flashcardService = Mock(FlashcardService)
-    def repetitionController = new RevisionController(flashcardService)
+    def revisionService = Mock(RevisionService)
+    def repetitionController = new RevisionController(revisionService)
     def mockMvc = MockMvcBuilders.standaloneSetup(repetitionController).build()
 
-    def "GET request to /api/repetition?limit=5 should ask FlashcardService for today's review items"(){
+    def "GET request to /api/revise/{deckId} should call revisionService.getForRevision"(){
         given:
-            def limit = 5
-            def flashcards = [new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard(), new Flashcard()]
-            1 * flashcardService.findForRepetiton(_) >> {flashcards}
+            revisionService.getForRevision(_) >> [new Flashcard(), new Flashcard(), new Flashcard()]
         when:
-            def response = mockMvc.perform(get("/api/repetition")
-                                    .param("limit", limit.toString()))
+            def response = mockMvc.perform(get("/api/revise/5"))
         then:
+            1 * revisionService.getForRevision(_)
             response.andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
     }
 
     @Ignore

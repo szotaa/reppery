@@ -34,9 +34,9 @@ public class FlashcardController {
         return ResponseEntity.ok(flashcardService.findById(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Void> update(@RequestBody Flashcard flashcard) throws FlashcardNotFoundException {
-        flashcardService.update(flashcard);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Flashcard flashcard) throws FlashcardNotFoundException {
+        flashcardService.update(id, flashcard);
         return ResponseEntity.ok().build();
     }
 

@@ -8,26 +8,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.Deck;
 import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
-import pl.szotaa.repperybackend.supermemo.repository.GroupRepository;
+import pl.szotaa.repperybackend.supermemo.repository.DeckRepository;
 import pl.szotaa.repperybackend.user.domain.User;
 
 @Service
 @RequiredArgsConstructor
 public class DeckService {
 
-    private final GroupRepository groupRepository;
+    private final DeckRepository deckRepository;
 
     public void add(Deck deck){
         deck.setOwner(this.getCurrentUser());
-        groupRepository.save(deck);
+        deckRepository.save(deck);
     }
 
     public Deck getById(long id) throws DeckNotFoundException {
-        return groupRepository.findById(id).orElseThrow(DeckNotFoundException::new);
+        return deckRepository.findById(id).orElseThrow(DeckNotFoundException::new);
     }
 
     public List<Deck> getAllGroupsOwnedByCurrentUser(){
-        return groupRepository.getAllByOwner(this.getCurrentUser());
+        return deckRepository.getAllByOwner(this.getCurrentUser());
     }
 
     private User getCurrentUser(){

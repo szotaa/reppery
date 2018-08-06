@@ -1,11 +1,9 @@
 package pl.szotaa.repperybackend.supermemo.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
+
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import pl.szotaa.repperybackend.supermemo.domain.Flashcard
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
@@ -18,20 +16,17 @@ class FlashcardControllerTest extends Specification {
 
     def flashcardService = Mock(FlashcardService)
     def flashcardController = new FlashcardController(flashcardService)
-    def writer = new ObjectMapper().writer().withDefaultPrettyPrinter()
     def mockMvc = MockMvcBuilders.standaloneSetup(flashcardController).build()
 
-    @Ignore
-    def "POST request on /flashcard should execute flashcardService.add" (){
+    def "POST request on /flashcard/{deckId} should execute flashcardService.add" (){
         given:
-            def flashcard = Flashcard.builder().id(1).build()
-            def json = writer.writeValueAsString(flashcard)
+            def json = "{\"title\": \"title\", \"front\": \"front\", \"back\": \"back\"}"
         when:
-            def response = mockMvc.perform(post("/flashcard")
+            def response = mockMvc.perform(post("/api/flashcard/5")
                             .contentType(MediaType.APPLICATION_JSON_UTF8)
                             .content(json))
         then:
-            1 * flashcardService.add(_)
+            1 * flashcardService.add(_, _)
             response.andExpect(status().isOk())
     }
 
@@ -43,18 +38,16 @@ class FlashcardControllerTest extends Specification {
             1 * flashcardService.findById(_ as Long)
     }
 
-    @Ignore
-    def "PUT request on /flashcard should execute flashcardService.update"(){
+    def "PUT request on /flashcard/{id} should execute flashcardService.update"(){
         given:
-            def flashcard = Flashcard.builder().id(1).build()
-            def json = writer.writeValueAsString(flashcard)
+            def json = "{\"title\": \"title\", \"front\": \"front\", \"back\": \"back\"}"
         when:
-            def response = mockMvc.perform(put("/flashcard/5")
+            def response = mockMvc.perform(put("/api/flashcard/5")
                                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                                 .content(json))
         then:
+            1 * flashcardService.update(_, _)
             response.andExpect(status().isOk())
-            1 * flashcardService.update(_)
     }
 
     def "DELETE request on /api/flashcard/{id} should execute flashcardService.delete"(){

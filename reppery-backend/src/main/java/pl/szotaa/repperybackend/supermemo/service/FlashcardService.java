@@ -25,8 +25,9 @@ public class FlashcardService {
         flashcardRepository.save(flashcard);
     }
 
-    public void update(Flashcard flashcard) throws FlashcardNotFoundException {
-        if(flashcardRepository.existsById(flashcard.getId())){
+    public void update(long id, Flashcard flashcard) throws FlashcardNotFoundException {
+        if(flashcardRepository.existsById(id)){
+            flashcard.setId(id);
             flashcardRepository.save(flashcard);
         } else {
             throw new FlashcardNotFoundException();

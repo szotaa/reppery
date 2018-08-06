@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.szotaa.repperybackend.supermemo.domain.Deck;
 import pl.szotaa.repperybackend.user.domain.User;
 
-public interface GroupRepository extends JpaRepository<Deck, Long> {
+public interface DeckRepository extends JpaRepository<Deck, Long> {
 
     List<Deck> getAllByOwner(User user);
 }
