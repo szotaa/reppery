@@ -1,7 +1,6 @@
 package pl.szotaa.repperybackend.supermemo.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.AnswerQuality;
@@ -15,44 +14,40 @@ import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 @RequiredArgsConstructor
 public class FlashcardService {
 
-    private final FlashcardRepository repository;
+    private final FlashcardRepository flashcardRepository;
     private final GroupService groupService;
 
-    public List<Flashcard> findForRepetiton(int limit){
-        return repository
-                .findAllWithNextDueDateBeforeOrEqualCurrentDate()
-                .stream()
-                .limit(limit)
-                .collect(Collectors.toList());
+    public List<Flashcard> getForRevision(long groupId){
+        return flashcardRepository.findAllToRevise(groupId);
     }
 
     public void processAnswer(long id, AnswerQuality answerQuality) throws FlashcardNotFoundException {
-        Flashcard flashcard = repository.findById(id).orElseThrow(FlashcardNotFoundException::new);
+        Flashcard flashcard = flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
         flashcard.updateByAnswer(answerQuality);
-        repository.save(flashcard);
+        flashcardRepository.save(flashcard);
     }
 
     public Flashcard findById(long id) throws FlashcardNotFoundException {
-        return repository.findById(id).orElseThrow(FlashcardNotFoundException::new);
+        return flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
     public void add(Flashcard flashcard, long groupId) throws GroupNotFoundException {
         Group group = groupService.getById(groupId);
         group.getFlashcards().add(flashcard);
-        repository.save(flashcard);
+        flashcardRepository.save(flashcard);
     }
 
     public void update(Flashcard flashcard) throws FlashcardNotFoundException {
-        if(repository.existsById(flashcard.getId())){
-            repository.save(flashcard);
+        if(flashcardRepository.existsById(flashcard.getId())){
+            flashcardRepository.save(flashcard);
         } else {
             throw new FlashcardNotFoundException();
         }
     }
 
     public void delete(long id) throws FlashcardNotFoundException {
-        if(repository.existsById(id)){
-            repository.deleteById(id);
+        if(flashcardRepository.existsById(id)){
+            flashcardRepository.deleteById(id);
         } else {
             throw new FlashcardNotFoundException();
         }

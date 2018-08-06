@@ -13,10 +13,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class RepetitionControllerTest extends Specification {
+class RevisionControllerTest extends Specification {
 
     def flashcardService = Mock(FlashcardService)
-    def repetitionController = new RepetitionController(flashcardService)
+    def repetitionController = new RevisionController(flashcardService)
     def mockMvc = MockMvcBuilders.standaloneSetup(repetitionController).build()
 
     def "GET request to /api/repetition?limit=5 should ask FlashcardService for today's review items"(){

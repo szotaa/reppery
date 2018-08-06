@@ -16,15 +16,15 @@ import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
-@RequestMapping("/api/repetition")
+@RequestMapping("/api/revise")
 @RequiredArgsConstructor
-public class RepetitionController {
+public class RevisionController {
 
     private final FlashcardService flashcardService;
 
-    @GetMapping
-    public ResponseEntity<List<Flashcard>> getTodaysRepetition(@RequestParam int limit){
-        return ResponseEntity.ok(flashcardService.findForRepetiton(limit));
+    @GetMapping("/{groupId}")
+    public ResponseEntity<List<Flashcard>> getFlashcardsForRevision(@PathVariable long groupId){
+        return ResponseEntity.ok(flashcardService.getForRevision(groupId));
     }
 
     @PostMapping("/{id}")
