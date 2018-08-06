@@ -12,5 +12,5 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
             "deck_id = :deckId AND " +
             "next_due_date <= current_date",
            nativeQuery = true)
-    List<Flashcard> findAllToRevise(@Param("groupId") long deckId);
+    List<Flashcard> findAllToRevise(@Param("deckId") long deckId);
 }
