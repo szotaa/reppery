@@ -1,7 +1,7 @@
 <div class="container">
   <mdb-card dark="true">
     <mdb-card-header class="elegant-color-dark text-center">
-      Sign in
+      Sign up
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
       <form>
@@ -15,13 +15,18 @@
           <input type="password" id="password" class="form-control" mdbInputDirective>
           <label for="password" class="text-white">Password</label>
         </div>
+        <div class="md-form">
+          <i class="fa fa-lock prefix white-text"></i>
+          <input type="password" id="passwordRepeat" class="form-control" mdbInputDirective>
+          <label for="passwordRepeat" class="text-white">Repeat password</label>
+        </div>
         <div class="text-center text-white">
-          <button class="elegant-color-dark" mdbBtn>Login</button>
+          <button class="elegant-color-dark" mdbBtn>Register</button>
         </div>
       </form>
     </mdb-card-body>
     <mdb-card-footer class="elegant-color-dark text-right">
-      <a class="text-white" routerLink="/register">Register...</a>
+      <a class="text-white" routerLink="/login">Log in...</a>
     </mdb-card-footer>
   </mdb-card>
 </div>
