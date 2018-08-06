@@ -2,7 +2,6 @@ package pl.szotaa.repperybackend.bootstrap;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
-import pl.szotaa.repperybackend.supermemo.domain.Group;
+import pl.szotaa.repperybackend.supermemo.domain.Deck;
 import pl.szotaa.repperybackend.user.domain.Role;
 import pl.szotaa.repperybackend.user.domain.User;
 
@@ -113,13 +112,13 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 .password(encodedPassword)
                 .build();
 
-        Group group1 = Group.builder()
+        Deck deck1 = Deck.builder()
                 .title("flashcards")
                 .flashcards(flashcards)
                 .owner(user)
                 .build();
 
-        Group group2 = Group.builder()
+        Deck deck2 = Deck.builder()
                 .title("admin flashcards")
                 .flashcards(adminFlashcards)
                 .owner(admin)
@@ -135,8 +134,8 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
                 flashcard3,
                 flashcard4,
                 flashcard5,
-                group1,
-                group2
+                deck1,
+                deck2
         );
     }
 }

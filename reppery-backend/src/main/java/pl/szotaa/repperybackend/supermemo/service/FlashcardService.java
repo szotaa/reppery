@@ -3,9 +3,9 @@ package pl.szotaa.repperybackend.supermemo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
-import pl.szotaa.repperybackend.supermemo.domain.Group;
+import pl.szotaa.repperybackend.supermemo.domain.Deck;
 import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
-import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
+import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 
 @Service
@@ -13,15 +13,15 @@ import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 public class FlashcardService {
 
     private final FlashcardRepository flashcardRepository;
-    private final GroupService groupService;
+    private final DeckService deckService;
 
     public Flashcard findById(long id) throws FlashcardNotFoundException {
         return flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
-    public void add(Flashcard flashcard, long groupId) throws GroupNotFoundException {
-        Group group = groupService.getById(groupId);
-        group.getFlashcards().add(flashcard);
+    public void add(Flashcard flashcard, long groupId) throws DeckNotFoundException {
+        Deck deck = deckService.getById(groupId);
+        deck.getFlashcards().add(flashcard);
         flashcardRepository.save(flashcard);
     }
 

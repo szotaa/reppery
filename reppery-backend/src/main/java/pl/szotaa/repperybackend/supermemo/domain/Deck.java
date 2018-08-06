@@ -33,7 +33,7 @@ import pl.szotaa.repperybackend.user.domain.User;
 @AllArgsConstructor
 @Table(name = "groups")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class Group extends AbstractEntity implements Serializable {
+public class Deck extends AbstractEntity implements Serializable {
 
     @NotNull
     @EqualsAndHashCode.Include
@@ -43,7 +43,7 @@ public class Group extends AbstractEntity implements Serializable {
     @NotNull
     @JsonIgnore
     @Builder.Default
-    @JoinColumn(name = "group_id")
+    @JoinColumn(name = "deck_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flashcard> flashcards = new HashSet<>();
 

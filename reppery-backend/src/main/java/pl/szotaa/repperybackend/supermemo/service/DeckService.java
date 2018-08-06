@@ -6,27 +6,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.szotaa.repperybackend.supermemo.domain.Group;
-import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
+import pl.szotaa.repperybackend.supermemo.domain.Deck;
+import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.GroupRepository;
 import pl.szotaa.repperybackend.user.domain.User;
 
 @Service
 @RequiredArgsConstructor
-public class GroupService {
+public class DeckService {
 
     private final GroupRepository groupRepository;
 
-    public void add(Group group){
-        group.setOwner(this.getCurrentUser());
-        groupRepository.save(group);
+    public void add(Deck deck){
+        deck.setOwner(this.getCurrentUser());
+        groupRepository.save(deck);
     }
 
-    public Group getById(long id) throws GroupNotFoundException {
-        return groupRepository.findById(id).orElseThrow(GroupNotFoundException::new);
+    public Deck getById(long id) throws DeckNotFoundException {
+        return groupRepository.findById(id).orElseThrow(DeckNotFoundException::new);
     }
 
-    public List<Group> getAllGroupsOwnedByCurrentUser(){
+    public List<Deck> getAllGroupsOwnedByCurrentUser(){
         return groupRepository.getAllByOwner(this.getCurrentUser());
     }
 

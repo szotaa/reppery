@@ -28,7 +28,7 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.szotaa.repperybackend.common.entity.AbstractEntity;
-import pl.szotaa.repperybackend.supermemo.domain.Group;
+import pl.szotaa.repperybackend.supermemo.domain.Deck;
 
 @Getter
 @Setter
@@ -75,7 +75,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
     @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "owner", orphanRemoval = true)
-    private Set<Group> groups = new HashSet<>();
+    private Set<Deck> decks = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

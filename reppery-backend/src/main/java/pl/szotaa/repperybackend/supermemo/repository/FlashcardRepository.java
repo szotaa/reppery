@@ -9,8 +9,8 @@ import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
 
     @Query(value = "SELECT * FROM flashcards WHERE " +
-            "group_id = :groupId AND " +
+            "deck_id = :deckId AND " +
             "next_due_date <= current_date",
            nativeQuery = true)
-    List<Flashcard> findAllToRevise(@Param("groupId") long groupId);
+    List<Flashcard> findAllToRevise(@Param("groupId") long deckId);
 }

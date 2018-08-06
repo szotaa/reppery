@@ -14,8 +14,8 @@ public class RevisionService {
 
     private final FlashcardRepository flashcardRepository;
 
-    public List<Flashcard> getForRevision(long groupId){
-        return flashcardRepository.findAllToRevise(groupId);
+    public List<Flashcard> getForRevision(long deckId){
+        return flashcardRepository.findAllToRevise(deckId);
     }
 
     public void processAnswer(long id, AnswerQuality answerQuality) throws FlashcardNotFoundException {

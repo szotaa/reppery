@@ -21,9 +21,9 @@ public class RevisionController {
 
     private final RevisionService revisionService;
 
-    @GetMapping("/{groupId}")
-    public ResponseEntity<List<Flashcard>> getFlashcardsForRevision(@PathVariable long groupId){
-        return ResponseEntity.ok(revisionService.getForRevision(groupId));
+    @GetMapping("/{deckId}")
+    public ResponseEntity<List<Flashcard>> getFlashcardsForRevision(@PathVariable long deckId){
+        return ResponseEntity.ok(revisionService.getForRevision(deckId));
     }
 
     @PostMapping("/{id}")

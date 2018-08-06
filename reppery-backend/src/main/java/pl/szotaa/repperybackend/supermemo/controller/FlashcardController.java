@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
-import pl.szotaa.repperybackend.supermemo.exception.GroupNotFoundException;
+import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
 import pl.szotaa.repperybackend.supermemo.service.FlashcardService;
 
 @RestController
@@ -22,10 +22,10 @@ public class FlashcardController {
 
     private final FlashcardService flashcardService;
 
-    @PostMapping("/{groupId}")
-    public ResponseEntity<Void> add(@RequestBody Flashcard flashcard, @PathVariable long groupId)
-            throws GroupNotFoundException {
-        flashcardService.add(flashcard, groupId);
+    @PostMapping("/{deckId}")
+    public ResponseEntity<Void> add(@RequestBody Flashcard flashcard, @PathVariable long deckId)
+            throws DeckNotFoundException {
+        flashcardService.add(flashcard, deckId);
         return ResponseEntity.ok().build();
     }
 

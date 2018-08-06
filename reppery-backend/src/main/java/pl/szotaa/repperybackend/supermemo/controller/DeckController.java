@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.szotaa.repperybackend.supermemo.domain.Group;
-import pl.szotaa.repperybackend.supermemo.service.GroupService;
+import pl.szotaa.repperybackend.supermemo.domain.Deck;
+import pl.szotaa.repperybackend.supermemo.service.DeckService;
 
 @RestController
-@RequestMapping("/api/group")
+@RequestMapping("/api/deck")
 @RequiredArgsConstructor
-public class GroupController {
+public class DeckController {
 
-    private final GroupService groupService;
+    private final DeckService deckService;
 
     @GetMapping
-    public ResponseEntity<List<Group>> getAllGroupsOwnedByCurrentUser(){
-        return ResponseEntity.ok(groupService.getAllGroupsOwnedByCurrentUser());
+    public ResponseEntity<List<Deck>> getAllGroupsOwnedByCurrentUser(){
+        return ResponseEntity.ok(deckService.getAllGroupsOwnedByCurrentUser());
     }
 
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody Group group){
-        this.groupService.add(group);
+    public ResponseEntity<Void> add(@RequestBody Deck deck){
+        this.deckService.add(deck);
         return ResponseEntity.ok().build();
     }
 }
