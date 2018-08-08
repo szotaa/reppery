@@ -4,6 +4,12 @@
       Sign in
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
+      <div class="alert danger-color-dark text-center" [hidden]="!showLoginError">
+        Invalid email or password.
+      </div>
+      <div class="alert info-color-dark text-center" [hidden]="!showRegistrationSuccessMessage">
+          Registration was successful. After verifying your email you will be able to log in.
+      </div>
       <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>

@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       rawValue.passwords.password
     );
     this.rest.post<User>("user", user).subscribe(
-      success => {this.router.navigateByUrl('/login?registered');},
+      success => {this.router.navigateByUrl('/login?new=true');},
           err => {this.showError = true;}
     )
   }
