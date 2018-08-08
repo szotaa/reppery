@@ -14,8 +14,8 @@ export class AuthService {
     }
   }
 
-  public getAuthentication(): string {
-    return localStorage.getItem('jwtToken');
+  public removeAuthentication(): void {
+    localStorage.removeItem('jwtToken');
   }
 
   public isAuthenticated(): boolean {

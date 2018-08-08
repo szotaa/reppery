@@ -11,8 +11,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  showLoginError: boolean;
-  showRegistrationSuccessMessage: boolean;
+  showLoginError: boolean = false;
+  showRegistrationSuccessMessage: boolean = false;
+  showLogoutMessage: boolean = false;
 
   constructor(
     private rest: RestService,
@@ -22,11 +23,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.showRegistrationSuccessMessage = false;
-    this.showLoginError = false;
-    if(this.checkIfNewUser()){
-      this.showRegistrationSuccessMessage = true;
-    }
+    this.processUrlParams();
   }
 
   public onSubmit(user: User): void{
@@ -37,22 +34,38 @@ export class LoginComponent implements OnInit {
         },
       err => {
         if(err.status == 403){
-          this.showRegistrationSuccessMessage = false;
+          this.hideMessages();
           this.showLoginError = true;
         }
       }
     )
   }
 
-  private checkIfNewUser(): boolean {
+  private processUrlParams(): void {
     this.activated.queryParams.subscribe(
       params => {
-        let newUser = params['new'];
-        if(newUser){
-          this.showRegistrationSuccessMessage = true;
+        if(params['new']){
+          this.handleNewUser();
+        } else if (params['logout']){
+          this.logout();
         }
       }
     );
-    return false;
+  }
+
+  private handleNewUser(): void {
+    this.showRegistrationSuccessMessage = true;
+  }
+
+  private logout(): void {
+    console.log('logout');
+    this.auth.removeAuthentication();
+    this.showLogoutMessage = true;
+  }
+
+  private hideMessages(): void {
+    this.showRegistrationSuccessMessage = false;
+    this.showLoginError = false;
+    this.showLogoutMessage = false;
   }
 }
