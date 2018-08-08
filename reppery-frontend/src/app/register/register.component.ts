@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   showError: boolean = false;
+  showEmailTaken: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,9 +39,19 @@ export class RegisterComponent implements OnInit {
       rawValue.passwords.password
     );
     this.rest.post<User>("user", user).subscribe(
-      success => {this.router.navigateByUrl('/login?new=true');},
-          err => {this.showError = true;}
-    )
+      request => {this.router.navigateByUrl('/login?new=true');},
+          err => {
+        if(err.status = 409){
+          this.handleEmailTaken();
+        } else {
+          this.showError = true;
+        }
+      }
+    );
+  }
+
+  private handleEmailTaken(): void {
+    this.showEmailTaken = true;
   }
 
   private matchValidator(group: FormGroup){

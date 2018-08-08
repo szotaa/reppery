@@ -4,7 +4,10 @@
       Sign up
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
-      <div class="alert alert-danger" [hidden]="!showError">
+      <div class="alert danger-color-dark text-center" [hidden]="!showEmailTaken">
+        Email already taken!
+      </div>
+      <div class="alert danger-color-dark text-center" [hidden]="!showError">
         Something went wrong, please try again!
       </div>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
