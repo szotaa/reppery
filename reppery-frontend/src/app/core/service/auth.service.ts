@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,20 @@ export class AuthService {
   }
 
   public getAuthentication(): string {
-    const jwtToken = localStorage.getItem('jwtToken');
-    if (jwtToken) {
-      return jwtToken;
-    }
-    return null;
+    return localStorage.getItem('jwtToken');
   }
 
   public isAuthenticated(): boolean {
-    if (localStorage.getItem('jwtToken') == null || localStorage.getItem('jwtToken') === '') {
-      return false;
+    const token = localStorage.getItem('jwtToken');
+    if (token && !this.isJwtTokenExpired(token)) {
+      return true;
     }
-    return true;
+    return false;
+  }
+
+  private isJwtTokenExpired(token: string): boolean {
+    const utcNow = Date.now().valueOf() / 1000;
+    let expiryDate = jwt_decode(token).exp;
+    return expiryDate < utcNow;
   }
 }
