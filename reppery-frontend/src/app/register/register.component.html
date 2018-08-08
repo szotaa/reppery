@@ -4,6 +4,9 @@
       Sign up
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
+      <div class="alert alert-danger" [hidden]="!showError">
+        Something went wrong, please try again!
+      </div>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>

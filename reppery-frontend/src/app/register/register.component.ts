@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {RestService} from "../core/service/rest.service";
+import {User} from "../core/model/user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -9,9 +12,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  showError: boolean = false;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private rest: RestService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,7 +31,16 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.registerForm.getRawValue());
+    let rawValue = this.registerForm.getRawValue();
+    let user = new User(
+      null,
+      rawValue.email,
+      rawValue.passwords.password
+    );
+    this.rest.post<User>("user", user).subscribe(
+      success => {this.router.navigateByUrl('/login?registered');},
+          err => {this.showError = true;}
+    )
   }
 
   private matchValidator(group: FormGroup){
