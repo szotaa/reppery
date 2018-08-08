@@ -27,7 +27,13 @@ public class DeckService {
     }
 
     public List<Deck> getAllGroupsOwnedByCurrentUser(){
-        return deckRepository.getAllByOwner(this.getCurrentUser());
+        List<Deck> decks = deckRepository.getAllByOwner(this.getCurrentUser());
+        decks.forEach(deck -> {
+            deck.setDue(
+                    this.deckRepository.countDue(deck.getId())
+            );
+        });
+        return decks;
     }
 
     private User getCurrentUser(){

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,4 +52,7 @@ public class Deck extends AbstractEntity implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
+
+    @Transient
+    private int due;
 }
