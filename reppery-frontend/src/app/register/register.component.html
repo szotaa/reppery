@@ -4,24 +4,32 @@
       Sign up
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
-      <form>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>
-          <input type="email" id="email" class="form-control" mdbInputDirective>
+          <input type="email" id="email" class="form-control"
+                 formControlName="email" mdbInputDirective
+                 data-error="Not a valid email" data-success="Ok">
           <label for="email" class="text-white">Email</label>
         </div>
-        <div class="md-form">
-          <i class="fa fa-lock prefix white-text"></i>
-          <input type="password" id="password" class="form-control" mdbInputDirective>
-          <label for="password" class="text-white">Password</label>
-        </div>
-        <div class="md-form">
-          <i class="fa fa-lock prefix white-text"></i>
-          <input type="password" id="passwordRepeat" class="form-control" mdbInputDirective>
-          <label for="passwordRepeat" class="text-white">Repeat password</label>
+        <div formGroupName="passwords">
+          <div class="md-form">
+            <i class="fa fa-lock prefix white-text"></i>
+            <input type="password" id="password" class="form-control"
+                   formControlName="password" mdbInputDirective
+                   data-error="Minimum 8 characters long" data-success="Ok">
+            <label for="password" class="text-white">Password</label>
+          </div>
+          <div class="md-form">
+            <i class="fa fa-lock prefix white-text"></i>
+            <input type="password" id="passwordRepeat" class="form-control"
+                   formControlName="passwordRepeat" mdbInputDirective
+                   data-error="Passwords do not match" data-success="Ok">
+            <label for="passwordRepeat" class="text-white">Repeat password</label>
+          </div>
         </div>
         <div class="text-center text-white">
-          <button class="elegant-color-dark" mdbBtn>Register</button>
+          <button class="elegant-color-dark" [disabled]="!registerForm.valid" mdbBtn>Register</button>
         </div>
       </form>
     </mdb-card-body>
