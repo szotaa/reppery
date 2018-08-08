@@ -4,15 +4,19 @@
       Sign in
     </mdb-card-header>
     <mdb-card-body class="grey darken-2">
-      <form>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>
-          <input type="email" id="email" class="form-control" mdbInputDirective>
+          <input type="email" id="email" class="form-control"
+                 mdbInputDirective [mdbValidate]="false"
+                 name="email" ngModel>
           <label for="email" class="text-white">Email</label>
         </div>
         <div class="md-form">
           <i class="fa fa-lock prefix white-text"></i>
-          <input type="password" id="password" class="form-control" mdbInputDirective>
+          <input type="password" id="password" class="form-control"
+                 [mdbValidate]="false" mdbInputDirective
+                 name="password" ngModel>
           <label for="password" class="text-white">Password</label>
         </div>
         <div class="text-center text-white">

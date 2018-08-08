@@ -9,7 +9,7 @@ import { FooterComponent } from './common/footer/footer.component';
 import { NavigationComponent } from './common/navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [],
