@@ -2,28 +2,52 @@
 - Work in progress
 ```
 # reppery [![Build Status](https://travis-ci.org/szotaa/reppery.svg?branch=master)](https://travis-ci.org/szotaa/reppery) ![Coverage Ratio](https://sonarcloud.io/api/project_badges/measure?project=pl.szotaa%3Areppery%3Areppery-backend&metric=coverage) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-Spaced repetition learning web application.
+<a href="https://en.wikipedia.org/wiki/Spaced_repetition">Spaced repetition</a> learning web application implementing 
+<a href="https://www.supermemo.com/english/ol/sm2.htm">SuperMemo 2 algorithm.</a>
 
-## documentation
-### javadoc
-View <a href="https://szotaa.github.io/reppery/">javadocs</a>.
+## goal
+Reppery was created as a 'skill showcase' app and hopefully will help me land my first job as a Java developer. 
+If you are interested in hiring me, drop me an email at <a href="mailto:kubaszota97@gmail.com">kubaszota97@gmail.com</a>.
 
-## developing process
-### tasks
+## docs
+- <a href="https://github.com/szotaa/reppery/wiki">Text documentation</a>
+- <a href="https://szotaa.github.io/reppery/">Javadocs</a>
 
-Trello task board is accessible <a href="https://trello.com/b/D4X3n5zD/reppery">here</a>.
+## live version
+Live version is accessible <a href="https://reppery.herokuapp.com/">here.</a> Please keep in mind that application is 
+running on <a href="https://www.heroku.com/pricing#dynos">free Heroku dyno</a> which means that application could be 
+'sleeping' therefore you might need to wait few minutes before it boots up. Reppery is also using free 
+<a href="https://sendgrid.com/pricing/">SendGrid</a> plan which limits 100 account registrations per day 
+(after exceeding this limit application will not send account activation emails at given day).
 
-### serving application
-To ease development process I created a Gradle's `serve` task which runs both frontend Angular application and Spring 
-Boot backend application in development modes. Execute `./gradlew serve --parallel` command from root project directory 
-and go to <a href="http://localhost:4200">localhost:4200</a> to access your local deployment.
+## screenshots
+TODO: add screenshots
 
-## build, execution and deployment
-### CI/CD pipeline description
-Whenever there are changes detected on master branch of this repository, Travis CI triggers new build. At first code 
-coverage is checked (code coverage ratio has to be greater than 0.5) via Jacoco Gradle Plugin. Tests are executed 
-afterwards and if they pass without failure code is pushed to SonarCloud where static code analysis is performed. 
-Next, code arrives to Heroku which runs `./gradlew stage -x test`. This command builds Angular client in production 
-mode, copies it into /resources/static Spring Boot directory and at that point Spring Boot application is being built.
-Finally, Heroku executes commands from `Procfile` which boot the application which is accessible 
-<a href="http://reppery.herokuapp.com/">here</a>.
+## used technologies
+
+* build, deployment, CI/CD
+    * Gradle
+    * Jacoco Gradle Plugin
+    * Travis CI
+    * Heroku
+    * SonarCloud.io
+    
+* backend
+    * Java 8
+    * Groovy
+    * Spring
+    * Hibernate
+    * Lombok
+    * JJWT
+    * Spock
+    * Sendgrid
+    * PostgreSQL (production)
+    * H2 DB (tests)
+    
+* frontend
+    * HTML
+    * SASS
+    * MDBootstrap
+    * Angular
+    
+
