@@ -10,6 +10,9 @@
       <div class="alert info-color-dark text-center" [hidden]="!showRegistrationSuccessMessage">
           Registration was successful. After verifying your email you will be able to log in.
       </div>
+      <div class="alert info-color-dark text-center" [hidden]="!showLogoutMessage">
+        You have been successfully logged out.
+      </div>
       <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>

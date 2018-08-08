@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
   }
 
   private logout(): void {
-    console.log('logout');
     this.auth.removeAuthentication();
     this.showLogoutMessage = true;
   }
