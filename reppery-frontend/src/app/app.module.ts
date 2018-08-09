@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {JwtInterceptor} from "./core/interceptor/jwt-interceptor";
+import { StudyComponent } from './study/study.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {JwtInterceptor} from "./core/interceptor/jwt-interceptor";
     NavigationComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    StudyComponent
   ],
   imports: [
     BrowserModule,
