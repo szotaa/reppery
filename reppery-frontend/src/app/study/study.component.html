@@ -1,3 +1,35 @@
-<p>
-  study works!
-</p>
+<div class="study text-center">
+  <mdb-card dark="true">
+    <mdb-card-header class="elegant-color">
+      {{currentFlashcard.title}}
+    </mdb-card-header>
+    <mdb-card-body class="front grey darken-2 h-100">
+      <mdb-card-text class="text-white">
+        {{currentFlashcard.front}}
+      </mdb-card-text>
+    </mdb-card-body>
+    <mdb-card-footer class="elegant-color">
+      <div class="text-white">
+        <a (click)="revealAnswer()">Show answer</a>
+      </div>
+    </mdb-card-footer>
+  </mdb-card>
+  <br/>
+  <mdb-card dark="true" [style.visibility]="isAnswerRevealed ? 'visible' : 'hidden'">
+    <mdb-card-header class="elegant-color">
+      Answer
+    </mdb-card-header>
+    <mdb-card-body class="back grey darken-2">
+      {{currentFlashcard.back}}
+    </mdb-card-body>
+    <mdb-card-footer class="elegant-color">
+      <div class="answer btn-group d-flex">
+        <button class="btn btn-md elegant-color w-100" mdbBtn (click)="processAnswerQuality(1)">1</button>
+        <button class="btn btn-md elegant-color w-100" mdbBtn (click)="processAnswerQuality(2)">2</button>
+        <button class="btn btn-md elegant-color w-100" mdbBtn (click)="processAnswerQuality(3)">3</button>
+        <button class="btn btn-md elegant-color w-100" mdbBtn (click)="processAnswerQuality(4)">4</button>
+        <button class="btn btn-md elegant-color w-100" mdbBtn (click)="processAnswerQuality(5)">5</button>
+      </div>
+    </mdb-card-footer>
+  </mdb-card>
+</div>

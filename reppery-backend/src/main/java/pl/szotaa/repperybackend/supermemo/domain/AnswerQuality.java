@@ -1,7 +1,6 @@
 package pl.szotaa.repperybackend.supermemo.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Represents correctness of user answer.
@@ -34,7 +33,6 @@ public enum AnswerQuality {
         this.value = ordinal();
     }
 
-    @JsonValue
     public int getValue(){
         return this.value;
     }

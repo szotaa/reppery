@@ -1,0 +1,22 @@
+.study {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 82vh;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .front {
+    flex: 0 1 41vh;
+    max-height: 41vh;
+    overflow: scroll;
+  }
+
+  .back {
+    flex: 1 1 41vh;
+    max-height: 41vh;
+    overflow: scroll;
+  }
+}
