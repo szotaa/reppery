@@ -10,7 +10,7 @@ Reppery was created as a 'skill showcase' app and hopefully will help me land my
 If you are interested in hiring me, drop me an email at <a href="mailto:kubaszota97@gmail.com">kubaszota97@gmail.com</a>.
 
 ## docs
-- <a href="https://github.com/szotaa/reppery/wiki">Text documentation</a>
+- <a href="https://github.com/szotaa/reppery/wiki/reppery-documentation">Text documentation</a>
 - <a href="https://szotaa.github.io/reppery/">Javadocs</a>
 
 ## live version
