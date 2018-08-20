@@ -14,6 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {JwtInterceptor} from "./core/interceptor/jwt-interceptor";
 import { StudyComponent } from './study/study.component';
+import { FlashcardCreatorComponent } from './flashcard-creator/flashcard-creator.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { StudyComponent } from './study/study.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    StudyComponent
+    StudyComponent,
+    FlashcardCreatorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+<mdb-card dark="true">
+  <mdb-card-header class="elegant-color text-center">
+    Add new flashcard...
+  </mdb-card-header>
+  <mdb-card-body class="grey darken-2">
+    <form ngNativeValidate #flashcardAddForm="ngForm" (ngSubmit)="onSubmit(flashcardAddForm.value); flashcardAddForm.reset()">
+      <div class="md-form">
+        <input type="text" id="title" class="form-control"
+               mdbInputDirective required
+               name="title" [mdbValidate]="false" ngModel>
+        <label for="title" class="text-white">Title</label>
+      </div>
+      <div class="md-form">
+        <input type="text" id="front" class="form-control"
+               mdbInputDirective required
+               name="front" [mdbValidate]="false" ngModel>
+        <label for="front" class="text-white">Front</label>
+      </div>
+      <div class="md-form">
+        <input type="text" id="back" class="form-control"
+               mdbInputDirective required
+               name="back" [mdbValidate]="false" ngModel>
+        <label for="back" class="text-white">Back</label>
+      </div>
+      <div class="text-center text-white">
+        <button class="elegant-color-dark" mdbBtn>Add</button>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer class="elegant-color text-right">
+    <a class="text-white" routerLink="/dashboard">Go back</a>
+  </mdb-card-footer>
+</mdb-card>
