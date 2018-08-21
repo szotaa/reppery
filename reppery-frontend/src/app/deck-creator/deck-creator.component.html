@@ -1,0 +1,21 @@
+<mdb-card dark="true">
+  <mdb-card-header class="elegant-color text-center">
+    Add new deck...
+  </mdb-card-header>
+  <mdb-card-body class="grey darken-2">
+    <form ngNativeValidate #deckAddForm="ngForm" (ngSubmit)="onSubmit(deckAddForm.value); deckAddForm.reset()">
+      <div class="md-form">
+        <input type="text" id="title" class="form-control"
+               mdbInputDirective required
+               name="title" [mdbValidate]="false" ngModel>
+        <label for="title" class="text-white">Title</label>
+      </div>
+      <div class="text-center text-white">
+        <button class="elegant-color-dark" mdbBtn>Add</button>
+      </div>
+    </form>
+  </mdb-card-body>
+  <mdb-card-footer class="elegant-color text-right">
+    <a class="text-white" routerLink="/dashboard">Go back</a>
+  </mdb-card-footer>
+</mdb-card>

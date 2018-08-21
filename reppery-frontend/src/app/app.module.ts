@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {JwtInterceptor} from "./core/interceptor/jwt-interceptor";
 import { StudyComponent } from './study/study.component';
 import { FlashcardCreatorComponent } from './flashcard-creator/flashcard-creator.component';
+import { DeckCreatorComponent } from './deck-creator/deck-creator.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FlashcardCreatorComponent } from './flashcard-creator/flashcard-creator
     RegisterComponent,
     DashboardComponent,
     StudyComponent,
-    FlashcardCreatorComponent
+    FlashcardCreatorComponent,
+    DeckCreatorComponent
   ],
   imports: [
     BrowserModule,

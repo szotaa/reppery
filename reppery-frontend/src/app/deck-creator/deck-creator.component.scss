@@ -1,0 +1,16 @@
+input {
+  color: white !important;
+}
+
+input[type]:focus:not([readonly]) + label {
+  color: #212121;
+}
+
+input[type]:focus:not([readonly]) {
+  border-bottom: 1px solid #212121;
+  box-shadow: 0 1px 0 0 #212121;
+}
+
+.md-form {
+  padding-bottom: 5px;
+}

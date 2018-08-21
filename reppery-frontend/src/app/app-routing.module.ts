@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {StudyComponent} from "./study/study.component";
 import {FlashcardCreatorComponent} from "./flashcard-creator/flashcard-creator.component";
+import {DeckCreatorComponent} from "./deck-creator/deck-creator.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'study/:deckId', component: StudyComponent},
-  {path: 'add/:deckId', component: FlashcardCreatorComponent}
+  {path: 'add', component: DeckCreatorComponent},
+  {path: 'add/:deckId', component: FlashcardCreatorComponent},
 ];
 
 @NgModule({
