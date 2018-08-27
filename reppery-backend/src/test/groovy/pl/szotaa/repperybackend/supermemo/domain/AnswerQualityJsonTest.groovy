@@ -3,6 +3,7 @@ package pl.szotaa.repperybackend.supermemo.domain
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.json.JsonTest
 import org.springframework.boot.test.json.JacksonTester
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @JsonTest
@@ -11,6 +12,7 @@ class AnswerQualityJsonTest extends Specification {
     @Autowired
     private JacksonTester<AnswerQuality> jacksonTester
 
+    @Ignore
     def "Should properly deserialize json to AnswerQuality object"(int ordinal, AnswerQuality expected){
         given:
             def json = ordinal.toString()
