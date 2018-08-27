@@ -32,7 +32,7 @@ import pl.szotaa.repperybackend.user.domain.User;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "groups")
+@Table(name = "decks")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Deck extends AbstractEntity implements Serializable {
 
