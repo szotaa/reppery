@@ -1,14 +1,17 @@
 package pl.szotaa.repperybackend.supermemo.service;
 
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
+import org.springframework.validation.annotation.Validated;
 import pl.szotaa.repperybackend.supermemo.domain.Deck;
-import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
+import pl.szotaa.repperybackend.supermemo.domain.Flashcard;
 import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
+import pl.szotaa.repperybackend.supermemo.exception.FlashcardNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class FlashcardService {
 
@@ -19,13 +22,13 @@ public class FlashcardService {
         return flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
-    public void add(Flashcard flashcard, long groupId) throws DeckNotFoundException {
+    public void add(@Valid Flashcard flashcard, long groupId) throws DeckNotFoundException {
         Deck deck = deckService.getById(groupId);
         deck.getFlashcards().add(flashcard);
         flashcardRepository.save(flashcard);
     }
 
-    public void update(long id, Flashcard flashcard) throws FlashcardNotFoundException {
+    public void update(long id, @Valid Flashcard flashcard) throws FlashcardNotFoundException {
         if(flashcardRepository.existsById(id)){
             flashcard.setId(id);
             flashcardRepository.save(flashcard);

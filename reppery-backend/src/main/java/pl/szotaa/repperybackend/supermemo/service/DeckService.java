@@ -2,22 +2,25 @@ package pl.szotaa.repperybackend.supermemo.service;
 
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import pl.szotaa.repperybackend.supermemo.domain.Deck;
 import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException;
 import pl.szotaa.repperybackend.supermemo.repository.DeckRepository;
 import pl.szotaa.repperybackend.user.domain.User;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class DeckService {
 
     private final DeckRepository deckRepository;
 
-    public void add(Deck deck){
+    public void add(@Valid Deck deck){
         deck.setOwner(this.getCurrentUser());
         deckRepository.save(deck);
     }
