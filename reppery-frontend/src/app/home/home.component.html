@@ -11,3 +11,12 @@
   which is much more efficient than traditional study methods. Click register above to set up
   new account and start studying!
 </p>
+<div [hidden]="!auth.isAuthenticated()">
+  <p>
+    <strong>How to</strong>
+  </p>
+  <p>
+    Click dashboard above to access your decks. Create new deck using add new deck button. After creating
+    new deck add flashcards to it using plus sign next to deck name. Study due cards using square academic cap button.
+  </p>
+</div>
