@@ -17,4 +17,8 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
             "next_due_date <= current_date",
             nativeQuery = true)
     Integer countDue(@Param("deckId") long deckId);
+
+    @Query(value = "SELECT owner_id FROM decks WHERE id = :deckId",
+           nativeQuery = true)
+    Long getOwnerId(@Param("deckId") long deckId);
 }
