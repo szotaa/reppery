@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {RestService} from "../core/service/rest.service";
 import {Flashcard} from "../core/model/flashcard";
 import {a} from "../../../node_modules/@angular/core/src/render3";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-study',
@@ -20,10 +21,12 @@ export class StudyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private rest: RestService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Study');
     this.deckId = this.route.snapshot.params['deckId'];
     this.rest.getAll<Flashcard[]>('revise/' + this.deckId).subscribe(
       response => {

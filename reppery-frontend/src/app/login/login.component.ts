@@ -3,6 +3,7 @@ import {User} from "../core/model/user";
 import {RestService} from "../core/service/rest.service";
 import {AuthService} from "../core/service/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,12 @@ export class LoginComponent implements OnInit {
     private rest: RestService,
     private auth: AuthService,
     private activated: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Login');
     this.processUrlParams();
   }
 

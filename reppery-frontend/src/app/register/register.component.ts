@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RestService} from "../core/service/rest.service";
 import {User} from "../core/model/user";
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-register',
@@ -18,10 +19,12 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rest: RestService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Register');
     this.registerForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       passwords: this.fb.group({
