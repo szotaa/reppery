@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   showLoginError: boolean = false;
   showRegistrationSuccessMessage: boolean = false;
   showLogoutMessage: boolean = false;
+  showAccountVerifiedMessage: boolean = false;
 
   constructor(
     private rest: RestService,
@@ -51,6 +52,8 @@ export class LoginComponent implements OnInit {
           this.handleNewUser();
         } else if (params['logout']){
           this.logout();
+        } else if (params['verify']) {
+          this.verifyAccount(params['verify']);
         }
       }
     );
@@ -63,6 +66,14 @@ export class LoginComponent implements OnInit {
   private logout(): void {
     this.auth.removeAuthentication();
     this.showLogoutMessage = true;
+  }
+
+  private verifyAccount(verificationToken: string): void {
+    this.rest.getOne('activate', verificationToken).subscribe(
+      response => {
+        this.showAccountVerifiedMessage = true;
+      }
+    )
   }
 
   private hideMessages(): void {

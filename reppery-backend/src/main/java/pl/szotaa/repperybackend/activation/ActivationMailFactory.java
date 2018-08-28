@@ -21,8 +21,12 @@ public class ActivationMailFactory {
         String activationUrl = this.activationUtil.getActivationUrl(user.getEmailActivationToken());
         Content content = new Content(
                 "text/plain",
-                "Activate your account here: " + activationUrl
+                    this.getText(activationUrl)
                 );
         return new Mail(FROM, SUBJECT, to, content);
+    }
+
+    private String getText(String activationUrl){
+        return "Click link below to activate your account: " + activationUrl;
     }
 }

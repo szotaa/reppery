@@ -20,7 +20,7 @@ public class ActivationUtil {
                 })
                 .getRequest();
 
-        return String.format("%s://%s:%d/api/activate/%s",
+        return String.format("%s://%s:%d/login?verify=%s",
                 request.getScheme(),
                 request.getServerName(),
                 request.getServerPort(),

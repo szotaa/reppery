@@ -13,6 +13,9 @@
       <div class="alert info-color-dark text-center" [hidden]="!showLogoutMessage">
         You have been successfully logged out.
       </div>
+      <div class="alert info-color-dark text-center" [hidden]="!showAccountVerifiedMessage">
+        Your account has been successfully verified. You can now log in.
+      </div>
       <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
         <div class="md-form">
           <i class="fa fa-envelope prefix white-text"></i>
