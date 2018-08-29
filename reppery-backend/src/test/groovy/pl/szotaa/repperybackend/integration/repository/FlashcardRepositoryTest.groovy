@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.supermemo.repository
+package pl.szotaa.repperybackend.integration.repository
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -6,7 +6,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import pl.szotaa.repperybackend.supermemo.domain.Deck
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard
-import spock.lang.Ignore
+import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository
+import pl.szotaa.repperybackend.user.domain.User
 import spock.lang.Specification
 
 import java.time.LocalDate
@@ -52,8 +53,26 @@ class FlashcardRepositoryTest extends Specification {
                 .nextDueDate(LocalDate.now().plusDays(2))
                 .build()
 
-        def deck = new Deck()
-        deck.setId(5L)
+        flashcard1.setId(1L)
+        flashcard2.setId(2L)
+        flashcard3.setId(3L)
+
+        testEntityManager.merge(flashcard1)
+        testEntityManager.merge(flashcard2)
+        testEntityManager.merge(flashcard3)
+
+        def owner = User.builder()
+                .email("user@email.com")
+                .password("password")
+                .build()
+
+        testEntityManager.persist(owner)
+
+        def deck = Deck.builder()
+                .title("title")
+                .owner(owner)
+                .build()
+
         deck.setFlashcards(new HashSet<Flashcard>(
                 Arrays.asList(
                         flashcard1,
@@ -62,14 +81,12 @@ class FlashcardRepositoryTest extends Specification {
                 )
         ))
 
-        testEntityManager.persist(deck)
-        testEntityManager.persist(flashcard1)
-        testEntityManager.persist(flashcard2)
-        testEntityManager.persist(flashcard3)
+        deck.setId(5L)
+
+        testEntityManager.merge(deck)
         testEntityManager.flush()
     }
 
-    @Ignore
     def "FindAllToRevise method should return all flashcards with nextDueDate equal to today's date"(){
         given:
             def deckId = 5L

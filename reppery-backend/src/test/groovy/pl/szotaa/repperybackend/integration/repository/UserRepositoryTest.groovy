@@ -1,4 +1,4 @@
-package pl.szotaa.repperybackend.user.repository
+package pl.szotaa.repperybackend.integration.repository
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import pl.szotaa.repperybackend.user.domain.Role
 import pl.szotaa.repperybackend.user.domain.User
+import pl.szotaa.repperybackend.user.repository.UserRepository
 import spock.lang.Specification
 
 @DataJpaTest
