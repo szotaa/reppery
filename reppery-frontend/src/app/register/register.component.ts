@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
   public onSubmit(): void {
     const rawValue = this.registerForm.getRawValue();
     const user = new User(
-      null,
       rawValue.email,
       rawValue.passwords.password
     );
