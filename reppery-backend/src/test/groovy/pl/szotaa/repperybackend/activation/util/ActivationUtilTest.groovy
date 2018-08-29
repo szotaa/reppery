@@ -21,6 +21,6 @@ class ActivationUtilTest extends Specification {
         when:
             def result = activationUtil.getActivationUrl(token)
         then:
-            result == "http://serverName:8080/api/activate/token"
+            result == "http://serverName:8080/login?verify=token"
     }
 }

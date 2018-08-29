@@ -4,7 +4,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard
 import pl.szotaa.repperybackend.supermemo.service.RevisionService
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -27,13 +26,12 @@ class RevisionControllerTest extends Specification {
             response.andExpect(status().isOk())
     }
 
-    @Ignore
-    def "POST request to /repetition should updateByAnswer and persist Flashcard entity with provided id"(){
+    def "POST request to /revise should updateByAnswer and persist Flashcard entity with provided id"(){
         given:
             def id = 1
-            def answerQuality = "{\"answerQuality\": 1}"
+            def answerQuality = "1"
         when:
-            def response = mockMvc.perform(post("/repetition/{id}", id)
+            def response = mockMvc.perform(post("/api/revise/{id}", id)
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
                     .content(answerQuality))
         then:

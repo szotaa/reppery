@@ -7,7 +7,6 @@ import pl.szotaa.repperybackend.supermemo.domain.Deck
 import pl.szotaa.repperybackend.supermemo.exception.DeckNotFoundException
 import pl.szotaa.repperybackend.supermemo.repository.DeckRepository
 import pl.szotaa.repperybackend.user.domain.User
-import spock.lang.Ignore
 import spock.lang.Specification
 
 class DeckServiceTest extends Specification {
@@ -52,13 +51,5 @@ class DeckServiceTest extends Specification {
             deckService.getById(id)
         then:
             thrown(DeckNotFoundException)
-    }
-
-    @Ignore
-    def "GetAllGroupsOwnedByCurrentUser should call deckRepository.getAllByOwner"(){
-        when:
-            deckService.getAllGroupsOwnedByCurrentUser()
-        then:
-            1 * deckRepository.getAllByOwner(_ as User)
     }
 }
