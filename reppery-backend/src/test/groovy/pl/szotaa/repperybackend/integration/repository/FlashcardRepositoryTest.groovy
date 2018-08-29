@@ -1,6 +1,5 @@
 package pl.szotaa.repperybackend.integration.repository
 
-import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -9,6 +8,7 @@ import pl.szotaa.repperybackend.supermemo.domain.Deck
 import pl.szotaa.repperybackend.supermemo.domain.Flashcard
 import pl.szotaa.repperybackend.supermemo.repository.FlashcardRepository
 import pl.szotaa.repperybackend.user.domain.User
+import spock.lang.Ignore
 import spock.lang.Specification
 
 import java.time.LocalDate
