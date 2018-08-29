@@ -10,7 +10,7 @@ Reppery was created as a 'skill showcase' app and hopefully will help me land my
 If you are interested in hiring me, drop me an email at <a href="mailto:kubaszota97@gmail.com">kubaszota97@gmail.com</a>.
 
 ## docs
-- <a href="https://github.com/szotaa/reppery/wiki/reppery-documentation">Text documentation</a>
+- <a href="https://github.com/szotaa/reppery/wiki">Text documentation</a>
 - <a href="https://szotaa.github.io/reppery/">Javadocs</a>
 
 ## live version
@@ -19,9 +19,6 @@ running on <a href="https://www.heroku.com/pricing#dynos">free Heroku dyno</a> w
 'sleeping' therefore you might need to wait few minutes before it boots up. Reppery is also using free 
 <a href="https://sendgrid.com/pricing/">SendGrid</a> plan which limits 100 account registrations per day 
 (after exceeding this limit application will not send account activation emails at given day).
-
-## screenshots
-TODO: add screenshots
 
 ## used technologies
 
@@ -51,3 +48,11 @@ TODO: add screenshots
     * Angular
     
 
+## screenshots
+
+![home](./screenshots/home.png)
+![register](./screenshots/register.png)
+![login](./screenshots/login.png)
+![dashboard](./screenshots/dashboard.png)
+![study1](./screenshots/study1.png)
+![study2](./screenshots/study2.png)
