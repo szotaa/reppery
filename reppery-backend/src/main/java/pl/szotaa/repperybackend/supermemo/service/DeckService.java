@@ -20,7 +20,7 @@ public class DeckService {
 
     private final DeckRepository deckRepository;
 
-    public void add(@Valid Deck deck){
+    public void add(Deck deck){
         deck.setOwner(this.getCurrentUser());
         this.deckRepository.save(deck);
     }
