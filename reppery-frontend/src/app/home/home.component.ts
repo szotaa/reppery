@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private title: Title,
-    private auth: AuthService) { }
+    public auth: AuthService) { }
 
   ngOnInit() {
     this.title.setTitle('Reppery');
