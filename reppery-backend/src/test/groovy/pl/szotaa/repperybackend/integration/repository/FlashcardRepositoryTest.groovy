@@ -1,5 +1,6 @@
 package pl.szotaa.repperybackend.integration.repository
 
+import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -87,6 +88,7 @@ class FlashcardRepositoryTest extends Specification {
         testEntityManager.flush()
     }
 
+    @Ignore
     def "FindAllToRevise method should return all flashcards with nextDueDate equal to today's date"(){
         given:
             def deckId = 5L
