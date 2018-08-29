@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Title} from "@angular/platform-browser";
-import {AuthService} from "../core/service/auth.service";
+import { Title } from '@angular/platform-browser';
+import { AuthService } from '../core/service/auth.service';
 
 @Component({
   selector: 'app-home',

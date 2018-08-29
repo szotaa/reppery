@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class AuthService {
 
   private isJwtTokenExpired(token: string): boolean {
     const utcNow = Date.now().valueOf() / 1000;
-    let expiryDate = jwt_decode(token).exp;
+    const expiryDate = jwt_decode(token).exp;
     return expiryDate < utcNow;
   }
 }

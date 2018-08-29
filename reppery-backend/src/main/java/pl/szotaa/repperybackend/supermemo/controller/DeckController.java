@@ -22,7 +22,7 @@ public class DeckController {
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<Deck>> getAllGroupsOwnedByCurrentUser(){
-        return ResponseEntity.ok(deckService.getAllGroupsOwnedByCurrentUser());
+        return ResponseEntity.ok(this.deckService.getAllGroupsOwnedByCurrentUser());
     }
 
     @PostMapping

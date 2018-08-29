@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../core/model/user";
-import {RestService} from "../core/service/rest.service";
-import {AuthService} from "../core/service/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Title} from "@angular/platform-browser";
+import { User } from '../core/model/user';
+import { RestService } from '../core/service/rest.service';
+import { AuthService } from '../core/service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +12,10 @@ import {Title} from "@angular/platform-browser";
 })
 export class LoginComponent implements OnInit {
 
-  showLoginError: boolean = false;
-  showRegistrationSuccessMessage: boolean = false;
-  showLogoutMessage: boolean = false;
-  showAccountVerifiedMessage: boolean = false;
+  showLoginError = false;
+  showRegistrationSuccessMessage = false;
+  showLogoutMessage = false;
+  showAccountVerifiedMessage = false;
 
   constructor(
     private rest: RestService,
@@ -30,27 +30,27 @@ export class LoginComponent implements OnInit {
     this.processUrlParams();
   }
 
-  public onSubmit(user: User): void{
-    this.rest.post<User>("auth", user).subscribe(
+  public onSubmit(user: User): void {
+    this.rest.post<User>('auth', user).subscribe(
       response => {
         this.auth.setAuthentication(response['jwtToken']);
-        this.router.navigateByUrl("/")
+        this.router.navigateByUrl('/');
         },
       err => {
-        if(err.status == 403){
+        if (err.status === 403) {
           this.hideMessages();
           this.showLoginError = true;
         }
       }
-    )
+    );
   }
 
   private processUrlParams(): void {
     this.activated.queryParams.subscribe(
       params => {
-        if(params['new']){
+        if (params['new']) {
           this.handleNewUser();
-        } else if (params['logout']){
+        } else if (params['logout']) {
           this.logout();
         } else if (params['verify']) {
           this.verifyAccount(params['verify']);
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       response => {
         this.showAccountVerifiedMessage = true;
       }
-    )
+    );
   }
 
   private hideMessages(): void {

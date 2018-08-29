@@ -22,9 +22,9 @@ import pl.szotaa.repperybackend.common.entity.AbstractEntity;
 @Entity
 @Builder
 @ToString
-@Table(name = "flashcards")
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "flashcards")
 @EqualsAndHashCode(callSuper = false)
 public class Flashcard extends AbstractEntity implements Serializable {
 

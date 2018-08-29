@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RestService} from "../core/service/rest.service";
-import {Deck} from "../core/model/deck";
-import {Title} from "@angular/platform-browser";
+import { RestService } from '../core/service/rest.service';
+import { Deck } from '../core/model/deck';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
       err => {
         console.log('idk');
       }
-    )
+    );
   }
 
 }

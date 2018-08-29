@@ -20,12 +20,12 @@ public class JwtTokenUtil {
     public JwtToken getJwtToken(Authentication auth){
         User user = (User) auth.getPrincipal();
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + expirationTimeMs);
+        Date expiryDate = new Date(now.getTime() + this.expirationTimeMs);
         String token = Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, this.jwtSecret)
                 .compact();
 
         return new JwtToken(token);
@@ -33,19 +33,9 @@ public class JwtTokenUtil {
 
     public String getUsernameFromJwt(String token){
         return Jwts.parser()
-                .setSigningKey(jwtSecret)
+                .setSigningKey(this.jwtSecret)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-    }
-
-    public boolean isExpired(String token){
-         Date expiryDate = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody()
-                .getExpiration();
-
-         return expiryDate.before(new Date());
     }
 }

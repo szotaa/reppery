@@ -15,12 +15,12 @@ public class JwtTokenFactory {
     private final JwtTokenUtil jwtTokenUtil;
 
     public JwtToken getJwtToken(User user){
-        Authentication authentication = authenticationManager.authenticate(
+        Authentication authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
                         user.getPassword()
                 ));
 
-        return jwtTokenUtil.getJwtToken(authentication);
+        return this.jwtTokenUtil.getJwtToken(authentication);
     }
 }

@@ -27,27 +27,27 @@ public class FlashcardController {
     @PreAuthorize("isAuthenticated() and @deckSecurityExpressions.isDeckOwner(#deckId, authentication)")
     public ResponseEntity<Void> add(@RequestBody Flashcard flashcard, @PathVariable long deckId)
             throws DeckNotFoundException {
-        flashcardService.add(flashcard, deckId);
+        this.flashcardService.add(flashcard, deckId);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated() and @flashcardSecurityExpressions.isFlashcardOwner(#id, authentication)")
     public ResponseEntity<Flashcard> get(@PathVariable long id) throws FlashcardNotFoundException {
-        return ResponseEntity.ok(flashcardService.findById(id));
+        return ResponseEntity.ok(this.flashcardService.findById(id));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("isAuthenticated() and @flashcardSecurityExpressions.isFlashcardOwner(#id, authentication)")
     public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Flashcard flashcard) throws FlashcardNotFoundException {
-        flashcardService.update(id, flashcard);
+        this.flashcardService.update(id, flashcard);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated() and @flashcardSecurityExpressions.isFlashcardOwner(#id, authentication)")
     public ResponseEntity<Void> delete(@PathVariable long id) throws FlashcardNotFoundException {
-        flashcardService.delete(id);
+        this.flashcardService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

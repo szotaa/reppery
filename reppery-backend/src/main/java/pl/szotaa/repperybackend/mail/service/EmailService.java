@@ -22,7 +22,7 @@ public class EmailService {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            sendGrid.api(request);
+            this.sendGrid.api(request);
         } catch (IOException e){
             log.error(e.getMessage());
         }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {RestService} from "../core/service/rest.service";
-import {User} from "../core/model/user";
-import {Router} from "@angular/router";
-import {Title} from "@angular/platform-browser";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RestService } from '../core/service/rest.service';
+import { User } from '../core/model/user';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +13,8 @@ import {Title} from "@angular/platform-browser";
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  showError: boolean = false;
-  showEmailTaken: boolean = false;
+  showError = false;
+  showEmailTaken = false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,21 +30,21 @@ export class RegisterComponent implements OnInit {
       passwords: this.fb.group({
         password: [null, [Validators.required, Validators.minLength(8)]],
         passwordRepeat: [null, Validators.required]
-      },{validator: this.matchValidator})
+      }, {validator: this.matchValidator})
     });
   }
 
   public onSubmit(): void {
-    let rawValue = this.registerForm.getRawValue();
-    let user = new User(
+    const rawValue = this.registerForm.getRawValue();
+    const user = new User(
       null,
       rawValue.email,
       rawValue.passwords.password
     );
-    this.rest.post<User>("user", user).subscribe(
-      request => {this.router.navigateByUrl('/login?new=true');},
+    this.rest.post<User>('user', user).subscribe(
+      request => {this.router.navigateByUrl('/login?new=true'); },
           err => {
-        if(err.status = 409){
+        if (err.status === 409) {
           this.handleEmailTaken();
         } else {
           this.showError = true;
@@ -57,12 +57,12 @@ export class RegisterComponent implements OnInit {
     this.showEmailTaken = true;
   }
 
-  private matchValidator(group: FormGroup){
-    let password = group.controls.password;
-    let passwordRepeat = group.controls.passwordRepeat;
+  private matchValidator(group: FormGroup) {
+    const password = group.controls.password;
+    const passwordRepeat = group.controls.passwordRepeat;
 
-    if(password.value !== passwordRepeat.value){
-      passwordRepeat.setErrors({mismatch: true})
+    if (password.value !== passwordRepeat.value) {
+      passwordRepeat.setErrors({mismatch: true});
     }
     return null;
   }

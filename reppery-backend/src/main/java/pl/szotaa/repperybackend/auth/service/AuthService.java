@@ -16,6 +16,6 @@ public class AuthService {
     private final JwtTokenFactory jwtTokenFactory;
 
     public JwtToken authenticate(@Valid User user){
-        return jwtTokenFactory.getJwtToken(user);
+        return this.jwtTokenFactory.getJwtToken(user);
     }
 }

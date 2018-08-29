@@ -22,15 +22,15 @@ public class DeckService {
 
     public void add(@Valid Deck deck){
         deck.setOwner(this.getCurrentUser());
-        deckRepository.save(deck);
+        this.deckRepository.save(deck);
     }
 
     public Deck getById(long id) throws DeckNotFoundException {
-        return deckRepository.findById(id).orElseThrow(DeckNotFoundException::new);
+        return this.deckRepository.findById(id).orElseThrow(DeckNotFoundException::new);
     }
 
     public List<Deck> getAllGroupsOwnedByCurrentUser(){
-        List<Deck> decks = deckRepository.getAllByOwner(this.getCurrentUser());
+        List<Deck> decks = this.deckRepository.getAllByOwner(this.getCurrentUser());
         decks.forEach(deck -> {
             deck.setDue(
                     this.deckRepository.countDue(deck.getId())

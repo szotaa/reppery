@@ -29,7 +29,7 @@ public class MockDataDatabaseInjector implements ApplicationRunner {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         this.getMockData().forEach(entityManager::persist);
     }
 

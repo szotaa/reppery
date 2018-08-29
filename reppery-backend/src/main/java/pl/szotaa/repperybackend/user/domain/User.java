@@ -20,7 +20,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,7 +41,6 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
 
     @Email
     @NotEmpty
-    @EqualsAndHashCode.Include
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
@@ -121,10 +119,7 @@ public class User extends AbstractEntity implements Serializable, UserDetails {
             return false;
         }
         User user = (User) o;
-        if(!(user.getEmail().toLowerCase().equals(this.email.toLowerCase()))){
-            return false;
-        }
-        return true;
+        return user.getEmail().toLowerCase().equals(this.email.toLowerCase());
     }
 
     @Override

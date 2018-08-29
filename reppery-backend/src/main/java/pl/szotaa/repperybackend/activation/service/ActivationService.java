@@ -18,8 +18,8 @@ public class ActivationService {
     private final UserRepository userRepository;
 
     public void sendActivationEmail(User user){
-        Mail activationEmail = activationMailFactory.getActivationEmail(user);
-        emailService.sendEmail(activationEmail);
+        Mail activationEmail = this.activationMailFactory.getActivationEmail(user);
+        this.emailService.sendEmail(activationEmail);
     }
 
     public void activate(String emailActivationToken) throws ActivationTokenNotFoundException {

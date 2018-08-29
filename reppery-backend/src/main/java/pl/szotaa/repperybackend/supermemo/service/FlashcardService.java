@@ -19,27 +19,27 @@ public class FlashcardService {
     private final DeckService deckService;
 
     public Flashcard findById(long id) throws FlashcardNotFoundException {
-        return flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
+        return this.flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
     }
 
     public void add(@Valid Flashcard flashcard, long groupId) throws DeckNotFoundException {
         Deck deck = deckService.getById(groupId);
         deck.getFlashcards().add(flashcard);
-        flashcardRepository.save(flashcard);
+        this.flashcardRepository.save(flashcard);
     }
 
     public void update(long id, @Valid Flashcard flashcard) throws FlashcardNotFoundException {
-        if(flashcardRepository.existsById(id)){
+        if(this.flashcardRepository.existsById(id)){
             flashcard.setId(id);
-            flashcardRepository.save(flashcard);
+            this.flashcardRepository.save(flashcard);
         } else {
             throw new FlashcardNotFoundException();
         }
     }
 
     public void delete(long id) throws FlashcardNotFoundException {
-        if(flashcardRepository.existsById(id)){
-            flashcardRepository.deleteById(id);
+        if(this.flashcardRepository.existsById(id)){
+            this.flashcardRepository.deleteById(id);
         } else {
             throw new FlashcardNotFoundException();
         }

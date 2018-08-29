@@ -14,7 +14,7 @@ public class DeckSecurityExpressions {
 
     public boolean isDeckOwner(long deckId, Authentication authentication) {
        User user = (User) authentication.getPrincipal();
-       long ownerId = deckRepository.getOwnerId(deckId);
+       long ownerId = this.deckRepository.getOwnerId(deckId);
        return user.getId() == ownerId;
     }
 }

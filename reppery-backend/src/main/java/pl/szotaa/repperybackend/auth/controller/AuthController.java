@@ -19,6 +19,6 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<JwtToken> login(@RequestBody User user){
-        return ResponseEntity.ok(authService.authenticate(user));
+        return ResponseEntity.ok(this.authService.authenticate(user));
     }
 }

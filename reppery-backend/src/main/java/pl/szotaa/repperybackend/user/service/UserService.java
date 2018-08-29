@@ -22,19 +22,19 @@ public class UserService implements UserDetailsService {
     private final ActivationService activationService;
 
     public void register(@Valid User user) throws EmailAlreadyTakenException {
-        if(userRepository.existsByEmail(user.getEmail())){
+        if(this.userRepository.existsByEmail(user.getEmail())){
             throw new EmailAlreadyTakenException();
         }
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        String encodedPassword = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         this.activationService.sendActivationEmail(user);
-        userRepository.save(user);
+        this.userRepository.save(user);
     }
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository
+        return this.userRepository
                 .findByEmail(username)
                 .<UsernameNotFoundException>orElseThrow(() -> {
                     throw new UsernameNotFoundException(username);

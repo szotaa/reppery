@@ -13,7 +13,7 @@ public class FlashcardSecurityExpressions {
     private final DeckSecurityExpressions deckSecurityExpressions;
 
     public boolean isFlashcardOwner(long flashcardId, Authentication authentication){
-        long deckId = flashcardRepository.getDeckId(flashcardId);
-        return deckSecurityExpressions.isDeckOwner(deckId, authentication);
+        long deckId = this.flashcardRepository.getDeckId(flashcardId);
+        return this.deckSecurityExpressions.isDeckOwner(deckId, authentication);
     }
 }

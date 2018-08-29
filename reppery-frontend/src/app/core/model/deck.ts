@@ -3,7 +3,5 @@ export class Deck {
     public title: string,
     public id?: number,
     public due?: number
-  ){
-
-  }
+  ) {}
 }

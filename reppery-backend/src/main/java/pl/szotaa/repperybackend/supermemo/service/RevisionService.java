@@ -15,12 +15,12 @@ public class RevisionService {
     private final FlashcardRepository flashcardRepository;
 
     public List<Flashcard> getForRevision(long deckId){
-        return flashcardRepository.findAllToRevise(deckId);
+        return this.flashcardRepository.findAllToRevise(deckId);
     }
 
     public void processAnswer(long id, AnswerQuality answerQuality) throws FlashcardNotFoundException {
-        Flashcard flashcard = flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
+        Flashcard flashcard = this.flashcardRepository.findById(id).orElseThrow(FlashcardNotFoundException::new);
         flashcard.updateByAnswer(answerQuality);
-        flashcardRepository.save(flashcard);
+        this.flashcardRepository.save(flashcard);
     }
 }

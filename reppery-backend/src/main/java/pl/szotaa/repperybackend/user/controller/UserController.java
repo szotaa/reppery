@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Void> register(@RequestBody User user) throws EmailAlreadyTakenException {
-        userService.register(user);
+        this.userService.register(user);
         return ResponseEntity.ok().build();
     }
 }

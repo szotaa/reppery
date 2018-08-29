@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {RestService} from "../core/service/rest.service";
-import {Flashcard} from "../core/model/flashcard";
-import {a} from "../../../node_modules/@angular/core/src/render3";
-import {Title} from "@angular/platform-browser";
+import { ActivatedRoute, Router } from '@angular/router';
+import { RestService } from '../core/service/rest.service';
+import { Flashcard } from '../core/model/flashcard';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-study',
@@ -14,9 +13,9 @@ export class StudyComponent implements OnInit {
 
   deckId: number;
   flashcards: Array<Flashcard>;
-  isAnswerRevealed: boolean = false;
+  isAnswerRevealed = false;
   currentFlashcard: Flashcard;
-  index: number = 0;
+  index = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +46,7 @@ export class StudyComponent implements OnInit {
   }
 
   private displayCard(): void {
-    if(this.index == this.flashcards.length){
+    if (this.index === this.flashcards.length) {
       this.end();
       return;
     }
@@ -60,9 +59,9 @@ export class StudyComponent implements OnInit {
   }
 
   private sendAnswerQuality(answerQuality: number): void {
-    this.rest.post("revise/" + this.currentFlashcard.id, answerQuality)
+    this.rest.post('revise/' + this.currentFlashcard.id, answerQuality)
       .subscribe(
         response => {}
-      )
+      );
   }
 }

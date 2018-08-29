@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {RestService} from "../core/service/rest.service";
-import {ActivatedRoute} from "@angular/router";
-import {Flashcard} from "../core/model/flashcard";
-import {Title} from "@angular/platform-browser";
+import { RestService } from '../core/service/rest.service';
+import { ActivatedRoute } from '@angular/router';
+import { Flashcard } from '../core/model/flashcard';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-flashcard-creator',
@@ -25,8 +25,8 @@ export class FlashcardCreatorComponent implements OnInit {
   }
 
   public onSubmit(flashcard: Flashcard): void {
-    this.rest.post<Flashcard>("flashcard/" + this.deckId, flashcard).subscribe(
+    this.rest.post<Flashcard>('flashcard/' + this.deckId, flashcard).subscribe(
       response => {}
-    )
+    );
   }
 }

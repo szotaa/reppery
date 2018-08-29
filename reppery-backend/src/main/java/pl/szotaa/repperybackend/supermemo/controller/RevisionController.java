@@ -25,14 +25,14 @@ public class RevisionController {
     @GetMapping("/{deckId}")
     @PreAuthorize("isAuthenticated() and @deckSecurityExpressions.isDeckOwner(#deckId, authentication)")
     public ResponseEntity<List<Flashcard>> getFlashcardsForRevision(@PathVariable long deckId){
-        return ResponseEntity.ok(revisionService.getForRevision(deckId));
+        return ResponseEntity.ok(this.revisionService.getForRevision(deckId));
     }
 
     @PostMapping("/{id}")
     @PreAuthorize("isAuthenticated() and @flashcardSecurityExpressions.isFlashcardOwner(#id, authentication)")
     public ResponseEntity<Void> processAnswer(@PathVariable Long id, @RequestBody AnswerQuality answerQuality)
             throws FlashcardNotFoundException {
-        revisionService.processAnswer(id, answerQuality);
+        this.revisionService.processAnswer(id, answerQuality);
         return ResponseEntity.ok().build();
     }
 }

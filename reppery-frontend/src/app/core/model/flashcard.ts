@@ -4,5 +4,5 @@ export class Flashcard {
     public front: string,
     public back: string,
     public id?: number
-  ){}
+  ) {}
 }
