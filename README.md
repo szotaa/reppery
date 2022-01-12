@@ -7,7 +7,6 @@
 
 ## goal
 Reppery was created as a 'skill showcase' app and hopefully will help me land my first job as a Java developer. 
-If you are interested in hiring me, drop me an email at <a href="mailto:kubaszota97@gmail.com">kubaszota97@gmail.com</a>.
 
 ## docs
 - <a href="https://github.com/szotaa/reppery/wiki">Text documentation</a>
